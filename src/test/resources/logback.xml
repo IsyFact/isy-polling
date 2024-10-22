@@ -9,7 +9,7 @@
     </root>
 
     <!-- IsyFact -->
-    <logger name="de.bund.bva.isyfact" level="INFO" additivity="false">
+    <logger name="de.bund.bva.isyfact" level="DEBUG" additivity="true">
         <appender-ref ref="KONSOLE"/>
     </logger>
     <!-- Spring -->
