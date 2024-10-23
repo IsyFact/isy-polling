@@ -1,0 +1,7 @@
+= Nutzungsvorgaben Polling: Inhalt
+
+// tag::inhalt[]
+
+Diese Dokumentation befindet sich im Augenblick im Aufbau. Bis zur Fertigstellung wird auf die xref:4.0.x@isyfact-standards-doku:isy-polling:nutzungsvorgaben/master.adoc[alten Nutzungsvorgaben von isy-polling] verwiesen.
+
+// end::inhalt[]
