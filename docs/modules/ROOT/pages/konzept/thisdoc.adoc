@@ -1,0 +1,7 @@
+= Konzept Polling: Einleitung
+
+// tag::inhalt[]
+[[einleitung]]
+== Einleitung
+Die Bibliothek `isy-polling` bietet nützliche Hilfsmittel, die von den Anwendungen der IsyFact genutzt werden können.
+// end::inhalt[]

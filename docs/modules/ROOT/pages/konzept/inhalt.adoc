@@ -1,0 +1,6 @@
+= Konzept Polling: Inhalt
+
+// tag::inhalt[]
+
+Diese Dokumentation befindet sich im Augenblick im Aufbau. Bis zur Fertigstellung wird auf das xref:4.0.x@isyfact-standards-doku:isy-polling:konzept/master.adoc[alte Konzept von isy-polling] verwiesen.
+// end::inhalt[]
