@@ -2,7 +2,6 @@
 ![GitHub Sprache](https://img.shields.io/badge/Language-Java_17-orange)
 ![GitHub Sprache](https://img.shields.io/badge/IsyFact-datetime-blue)
 
-
 # isy-polling
 
 Diese Bibliothek bietet Funktionen Polling-Operationen mit mehreren Servern.
