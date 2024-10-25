@@ -59,19 +59,16 @@
             <artifactId>logstash-logback-encoder</artifactId>
             <version>${logstash-logback-encoder.version}</version>
         </dependency>
-
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
-
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>${logback.version}</version>
         </dependency>
-
         <dependency>
             <groupId>de.bund.bva.isyfact</groupId>
             <artifactId>isy-datetime</artifactId>
@@ -82,16 +79,11 @@
             <artifactId>isy-exception-core</artifactId>
             <version>${isy-exception-core.version}</version>
         </dependency>
-
-
-
         <dependency>
             <groupId>de.bund.bva.isyfact</groupId>
             <artifactId>isy-logging</artifactId>
             <version>${isy-logging.version}</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
@@ -123,7 +115,6 @@
             <optional>true</optional>
             <version>${spring.boot.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -175,12 +166,10 @@
             <artifactId>jakarta.validation-api</artifactId>
             <version>${jakarta.validation.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -222,8 +211,6 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
-
-
         </plugins>
     </build>
 </project>
