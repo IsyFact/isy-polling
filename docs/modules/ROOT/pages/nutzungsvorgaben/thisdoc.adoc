@@ -1,9 +1,12 @@
-= Nutzungsvorgaben Isy Polling: Einleitung
+= Nutzungsvorgaben Polling: Einleitung
 
 // tag::inhalt[]
 [[einleitung]]
 == Einleitung
 
-Die Bibliothek `isy-polling` bietet nützliche Hilfsmittel, die von den Anwendungen der IsyFact genutzt werden können.
+Im xref:konzept/master.adoc[] werden die konzeptionellen Grundlagen und Vorgaben für Polling definiert, um eine einheitliche Umsetzung in der gesamten xref:glossary:glossary:master.adoc#glossar-anwendungslandschaft[Anwendungslandschaft] zu gewährleisten.
+Dieses Dokument beschreibt die Verwendung der xref:glossary:glossary:master.adoc#glossar-bibliothek[Bibliothek] `isy-polling`, die dieses Verfahren implementiert.
 
+Dieses Dokument richtet sich an Entwickler und Chefdesigner, die Polling-Funktionalität in eine Anwendung integrieren wollen.
 // end::inhalt[]
+
