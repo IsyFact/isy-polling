@@ -1,4 +1,4 @@
-= Konzept isy-util
+= Konzept Polling
 
 include::glossary:licence:partial$licence.adoc[]
 
