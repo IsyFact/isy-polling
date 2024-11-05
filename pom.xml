@@ -62,8 +62,6 @@
         <logback-classic.version>1.5.6</logback-classic.version>
         <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
 
-        <maven.jacoco.argLine/>
-
         <maven.jar.version>3.3.0</maven.jar.version>
         <maven.deploy.version>2.8.2</maven.deploy.version>
         <maven.flatten.version>1.2.7</maven.flatten.version>
@@ -204,10 +202,17 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven.surefire.version}</version>
                     <configuration>
-                        <testSourceDirectory>${project.basedir}/test</testSourceDirectory>
-                        <includes>
-                            <include>**/*.java</include>
-                        </includes>
+                        <argLine>-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010
+                            -Dcom.sun.management.jmxremote.local.only=false
+                            -Dcom.sun.management.jmxremote.authenticate=false
+                            -Dcom.sun.management.jmxremote.ssl=false
+                            -Dfile.encoding=${project.build.sourceEncoding}
+                            @{maven.jacoco.argLine}
+                        </argLine>
+                        <systemPropertyVariables>
+                            <user.language>de</user.language>
+                            <user.country>DE</user.country>
+                        </systemPropertyVariables>
                     </configuration>
                 </plugin>
 
@@ -217,13 +222,16 @@
                     <version>${maven.jacoco.version}</version>
                     <executions>
                         <execution>
-                            <id>prepare-agent</id>
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
+                            <configuration>
+                                <propertyName>maven.jacoco.argLine</propertyName>
+                            </configuration>
                         </execution>
                         <execution>
                             <id>report</id>
+                            <phase>test</phase>
                             <goals>
                                 <goal>report</goal>
                             </goals>
@@ -306,48 +314,6 @@
 
         <plugins>
             <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                        <configuration>
-                            <propertyName>maven.jacoco.argLine</propertyName>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire.version}</version>
-                <configuration>
-                    <argLine>-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010
-                        -Dcom.sun.management.jmxremote.local.only=false
-                        -Dcom.sun.management.jmxremote.authenticate=false
-                        -Dcom.sun.management.jmxremote.ssl=false
-                        -Dfile.encoding=${project.build.sourceEncoding}
-                        @{maven.jacoco.argLine}
-                    </argLine>
-                    <systemPropertyVariables>
-                        <user.language>de</user.language>
-                        <user.country>DE</user.country>
-                    </systemPropertyVariables>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
@@ -370,10 +336,17 @@
                 <version>${maven.deploy.version}</version>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
 
