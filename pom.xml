@@ -2,12 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>IsyFact Polling</name>
-    <description>Komponente für Polling-Operationen über mehrere Server.</description>
-    <artifactId>isy-polling</artifactId>
     <groupId>de.bund.bva.isyfact</groupId>
+    <artifactId>isy-polling</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
+
+    <name>IsyFact Polling</name>
+    <description>Komponente für Polling-Operationen über mehrere Server.</description>
+    <url>http://isyfact.de</url>
 
     <licenses>
         <license>
