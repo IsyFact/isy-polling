@@ -147,7 +147,7 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
     private long getZeitraumLetztePollingAktivitaet(JMXConnectionParameter verbindungsparameter,
                                                     String clusterId, String mBeanObjektName) {
 
-        long ergebnis = Long.MAX_VALUE;
+        long ergebnis;
 
         JMXConnector jmxc = null;
         try {
@@ -222,7 +222,7 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
      * {@inheritDoc}
      */
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         this.pollingClusterMap = lesePollingCluster();
     }
 

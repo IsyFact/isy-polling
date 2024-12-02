@@ -17,28 +17,33 @@
 package de.bund.bva.isyfact.polling.impl;
 
 
+import de.bund.bva.isyfact.datetime.util.DateTimeUtil;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import de.bund.bva.isyfact.datetime.util.DateTimeUtil;
 
 /**
  * Ein Polling-Cluster besteht aus Menge von Servern, die jeweils die gleiche Nachrichtenquelle abfragen
  * und wird durch eine innerhalb der Anwendung eindeutige Id identifiziert.
  * <br>
  * Diese Klasse enthält die beschreibenden Attribute eines Polling-Clusters.
- *
  */
 class PollingCluster {
 
-    /** ID des Polling-Clusters. */
-    private String clusterId;
+    /**
+     * ID des Polling-Clusters.
+     */
+    final private String clusterId;
 
-    /** Wartezeit bis zur Übernahme der Polling-Aktivität in Sekunden. */
-    private int wartezeit;
+    /**
+     * Wartezeit bis zur Übernahme der Polling-Aktivität in Sekunden.
+     */
+    final private int wartezeit;
 
-    /** Name des Clusters. Dieser Name wird zur Bildung der MBean-Identifikation verwendet. */
-    private String clusterName;
+    /**
+     * Name des Clusters. Dieser Name wird zur Bildung der MBean-Identifikation verwendet.
+     */
+    final private String clusterName;
 
     /**
      * Liste der der Verbindungsangaben zu den JMX-Services der Anwendungen,
@@ -46,29 +51,28 @@ class PollingCluster {
      */
     private List<JMXConnectionParameter> jmxConnectionParameterListe = new ArrayList<>(5);
 
-    /** MBean-Objekt-Name. Wird aus der Cluster-Id abgeleitet */
-    private String mBeanObjektName;
+    /**
+     * MBean-Objekt-Name. Wird aus der Cluster-Id abgeleitet
+     */
+    private final String mBeanObjektName;
 
-    /** Zeitstempel der letzten durchgeführten Polling-Aktivität. */
+    /**
+     * Zeitstempel der letzten durchgeführten Polling-Aktivität.
+     */
     private long zeitstempel;
 
 
     /**
      * Erzeugt einen neuen Polling-Cluster.
      *
-     * @param jmxDomain
-     *          Domain-Name für die JMX-MBeans.
-     * @param clusterId
-     *          ID des Polling-Clusters.
-     * @param clusterName
-     *          Name des Clusters. Dieser Name wird zur Bildung der MBean-Identifikation verwendet.
-     * @param wartezeit
-     *          Wartezeit bis zur Übernahme der Polling-Aktivität in Sekunden.
-     * @param jmxConnectionParameterListe
-     *          Liste mit Verbindungsangaben.
+     * @param jmxDomain                   Domain-Name für die JMX-MBeans.
+     * @param clusterId                   ID des Polling-Clusters.
+     * @param clusterName                 Name des Clusters. Dieser Name wird zur Bildung der MBean-Identifikation verwendet.
+     * @param wartezeit                   Wartezeit bis zur Übernahme der Polling-Aktivität in Sekunden.
+     * @param jmxConnectionParameterListe Liste mit Verbindungsangaben.
      */
     PollingCluster(String jmxDomain, String clusterId, String clusterName, int wartezeit,
-        List<JMXConnectionParameter> jmxConnectionParameterListe) {
+                   List<JMXConnectionParameter> jmxConnectionParameterListe) {
 
         if (clusterId == null) {
             throw new IllegalArgumentException("Die ClusterId darf nicht leer sein!");
@@ -105,6 +109,7 @@ class PollingCluster {
 
     /**
      * Liefert das Feld 'clusterName' zurück.
+     *
      * @return Wert von clusterName
      */
     public String getClusterName() {
@@ -135,6 +140,7 @@ class PollingCluster {
 
     /**
      * Liefert das Feld 'mBeanObjektName' zurück.
+     *
      * @return Wert von mBeanObjektName
      */
     String getMBeanObjektName() {
