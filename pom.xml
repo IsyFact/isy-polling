@@ -47,7 +47,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <isy-datetime.version>3.0.0</isy-datetime.version>
+        <isy-datetime.version>4.0.0-SNAPSHOT</isy-datetime.version>
         <isy-util.version>4.0.0-SNAPSHOT</isy-util.version>
 
         <spring.framework.version>6.1.6</spring.framework.version>
