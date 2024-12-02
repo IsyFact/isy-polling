@@ -49,7 +49,6 @@
 
         <isy-datetime.version>3.0.0</isy-datetime.version>
         <isy-util.version>4.0.0-SNAPSHOT</isy-util.version>
-        <isy-logging.version>3.0.0</isy-logging.version>
 
         <spring.framework.version>6.1.6</spring.framework.version>
         <spring.boot.version>3.2.5</spring.boot.version>
@@ -59,7 +58,7 @@
         <junit.version>4.13.2</junit.version>
         <jupiter.version>5.10.2</jupiter.version>
         <assertj.version>3.24.2</assertj.version>
-
+        <aspectjweaver.version>1.9.22</aspectjweaver.version>
         <slf4j.version>2.0.13</slf4j.version>
         <logback.version>1.4.14</logback.version>
         <logback-classic.version>1.5.6</logback-classic.version>
@@ -74,6 +73,18 @@
 
     <dependencies>
         <dependency>
+            <groupId>de.bund.bva.isyfact</groupId>
+            <artifactId>isy-datetime</artifactId>
+            <version>${isy-datetime.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>de.bund.bva.isyfact</groupId>
+            <artifactId>isy-util</artifactId>
+            <version>${isy-util.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
             <version>${logstash-logback-encoder.version}</version>
@@ -83,6 +94,7 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
@@ -90,28 +102,9 @@
         </dependency>
 
         <dependency>
-            <groupId>de.bund.bva.isyfact</groupId>
-            <artifactId>isy-datetime</artifactId>
-            <version>${isy-datetime.version}</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>de.bund.bva.isyfact</groupId>
-            <artifactId>isy-logging</artifactId>
-            <version>${isy-logging.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.bund.bva.isyfact</groupId>
-            <artifactId>isy-util</artifactId>
-            <version>${isy-util.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                </exclusion>
-
-            </exclusions>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.framework.version}</version>
         </dependency>
 
         <dependency>
@@ -124,16 +117,20 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.framework.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
+            <artifactId>spring-web</artifactId>
             <version>${spring.framework.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
@@ -146,6 +143,12 @@
             <version>${spring.boot.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectjweaver.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.framework.version}</version>
@@ -157,6 +160,7 @@
             <version>${spring.boot.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
