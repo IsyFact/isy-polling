@@ -16,9 +16,9 @@
  */
 package de.bund.bva.isyfact.polling.common.exception;
 
-import de.bund.bva.isyfact.util.text.MessageProvider;
-
 import java.io.Serial;
+
+import static de.bund.bva.isyfact.util.text.MessageProvider.createMessage;
 
 /**
  * Abstrakte technische <i>unchecked</i> Haupt-Exception. Alle technischen, <i>unchecked</i> Exceptions
@@ -46,7 +46,7 @@ public abstract class PollingTechnicalRuntimeException extends RuntimeException 
      *                   <tt>null</tt> als Wert ist erlaubt und bedeutet, dass keine Variablen zu ersetzen sind.
      */
     public PollingTechnicalRuntimeException(String ausnahmeID, String... parameter) {
-        super(MessageProvider.getMessage(ausnahmeID, parameter));
+        super(createMessage(ausnahmeID, parameter));
     }
 
     /**
@@ -66,6 +66,6 @@ public abstract class PollingTechnicalRuntimeException extends RuntimeException 
      */
     public PollingTechnicalRuntimeException(String ausnahmeID, Throwable throwable,
                                             String... parameter) {
-        super(MessageProvider.getMessage(ausnahmeID, parameter), throwable);
+        super(createMessage(ausnahmeID, parameter), throwable);
     }
 }
