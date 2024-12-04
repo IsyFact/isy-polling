@@ -43,7 +43,7 @@ public abstract class PollingTechnicalRuntimeException extends RuntimeException 
      *                   als Fehler-Nachricht für die Exception verwendet wird aus einem ResourceBundle zu
      *                   laden.
      * @param parameter  Die Parameter. Parameter für die möglichen Variablen in einer Fehler-Nachricht.
-     *                   <tt>null</tt> als Wert ist erlaubt und bedeutet, dass kein Variablen zu ersetzen sind.
+     *                   <tt>null</tt> als Wert ist erlaubt und bedeutet, dass keine Variablen zu ersetzen sind.
      */
     public PollingTechnicalRuntimeException(String ausnahmeID, String... parameter) {
         super(MessageProvider.getMessage(ausnahmeID, parameter));
@@ -59,7 +59,7 @@ public abstract class PollingTechnicalRuntimeException extends RuntimeException 
      * @param ausnahmeID Die Ausnahme-ID. Der Schlüssel, welcher verwendet wird, um einen Nachrichtentext, welcher
      *                   als Fehler-Nachricht für die Exception verwendet wird aus einem ResourceBundle zu laden.
      * @param parameter  Die Parameter. Parameter für die möglichen Variablen in einer Fehler-Nachricht.
-     *                   <tt>null</tt> als Wert ist erlaubt und bedeutet, dass kein Variablen zu ersetzen sind.
+     *                   <tt>null</tt> als Wert ist erlaubt und bedeutet, dass keine Variablen zu ersetzen sind.
      * @param throwable  Der Grund. Throwable wird gespeichert für die spätere Nutzung durch die Methode
      *                   {@link #getCause()}. <tt>null</tt> als Wert ist erlaubt und bedeutet, dass kein Grund
      *                   existiert oder der Grund nicht bekannt ist.

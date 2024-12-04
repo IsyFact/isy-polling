@@ -50,19 +50,18 @@
         <isy-datetime.version>4.0.0-SNAPSHOT</isy-datetime.version>
         <isy-util.version>4.0.0-SNAPSHOT</isy-util.version>
 
+        <logback.version>1.4.14</logback.version>
+        <logback-classic.version>1.5.6</logback-classic.version>
+
         <spring.framework.version>6.1.6</spring.framework.version>
         <spring.boot.version>3.2.5</spring.boot.version>
 
-        <jakarta.validation.version>3.0.2</jakarta.validation.version>
-        <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
         <junit.version>4.13.2</junit.version>
         <jupiter.version>5.10.2</jupiter.version>
+        <jakarta.validation.version>3.0.2</jakarta.validation.version>
+        <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
         <assertj.version>3.24.2</assertj.version>
         <aspectjweaver.version>1.9.22</aspectjweaver.version>
-        <slf4j.version>2.0.13</slf4j.version>
-        <logback.version>1.4.14</logback.version>
-        <logback-classic.version>1.5.6</logback-classic.version>
-        <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
 
         <maven.jar.version>3.3.0</maven.jar.version>
         <maven.deploy.version>2.8.2</maven.deploy.version>
@@ -84,11 +83,6 @@
             <version>${isy-util.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-            <version>${logstash-logback-encoder.version}</version>
-        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -112,6 +106,7 @@
             <artifactId>spring-beans</artifactId>
             <version>${spring.framework.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -130,35 +125,23 @@
             <version>${spring.boot.version}</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
             <version>${spring.boot.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>${aspectjweaver.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.framework.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-test</artifactId>
-            <version>${spring.boot.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -167,38 +150,54 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.14.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.framework.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <version>${spring.boot.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.validator.version}</version>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging-annotations</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging-processor</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
+
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
             <version>${jakarta.validation.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

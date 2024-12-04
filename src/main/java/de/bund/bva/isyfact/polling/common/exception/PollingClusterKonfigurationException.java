@@ -40,7 +40,7 @@ public class PollingClusterKonfigurationException extends PollingTechnicalRuntim
      *                   als Fehler-Nachricht für die Exception verwendet wird aus einem ResourceBundle zu
      *                   laden.
      * @param parameter  Die Parameter. Parameter für die möglichen Variablen in einer Fehler-Nachricht.
-     *                   <tt>null</tt> als Wert ist erlaubt und bedeutet, dass kein Variablen zu ersetzen sind.
+     *                   <tt>null</tt> als Wert ist erlaubt und bedeutet, dass keine Variablen zu ersetzen sind.
      */
     public PollingClusterKonfigurationException(String ausnahmeID, String... parameter) {
         super(ausnahmeID, parameter);

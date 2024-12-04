@@ -44,18 +44,15 @@ class PollingCluster {
      * Name des Clusters. Dieser Name wird zur Bildung der MBean-Identifikation verwendet.
      */
     final private String clusterName;
-
-    /**
-     * Liste der der Verbindungsangaben zu den JMX-Services der Anwendungen,
-     * die außer der eigenen Anwendung noch zu diesem Polling-Cluster gehören.
-     */
-    private List<JMXConnectionParameter> jmxConnectionParameterListe = new ArrayList<>(5);
-
     /**
      * MBean-Objekt-Name. Wird aus der Cluster-Id abgeleitet
      */
     private final String mBeanObjektName;
-
+    /**
+     * Liste der Verbindungsangaben zu den JMX-Services der Anwendungen,
+     * die außer der eigenen Anwendung noch zu diesem Polling-Cluster gehören.
+     */
+    private List<JMXConnectionParameter> jmxConnectionParameterListe = new ArrayList<>(5);
     /**
      * Zeitstempel der letzten durchgeführten Polling-Aktivität.
      */
@@ -132,10 +129,10 @@ class PollingCluster {
      * @return Array mit JMX-Verbindungsangaben.
      */
     JMXConnectionParameter[] getJmxConnectionParameter() {
-        if (jmxConnectionParameterListe.size() == 0) {
+        if (jmxConnectionParameterListe.isEmpty()) {
             return new JMXConnectionParameter[0];
         }
-        return jmxConnectionParameterListe.toArray(new JMXConnectionParameter[jmxConnectionParameterListe.size()]);
+        return jmxConnectionParameterListe.toArray(new JMXConnectionParameter[0]);
     }
 
     /**

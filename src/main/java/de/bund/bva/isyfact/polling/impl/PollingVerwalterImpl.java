@@ -236,7 +236,7 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
         // JMX-Verbindungen lesen und Polling-Modus ermitteln.
         Map<String, JMXConnectionParameter> jmxVerbindungenMap = leseJmxVerbindungen();
 
-        // Im Standalone-Modus wird keine Clusterkonfiguration benötigt.
+        // Im Standalone-Modus wird keine Cluster-Konfiguration benötigt.
         if (modusStandalone) {
             return clusterMap;
         }
@@ -275,7 +275,7 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
      * Ermittelt die JMX-Verbindungsparameter aus der Konfiguration. Sind keine JMX-Verbindungen konfiguriert,
      * wird der Polling-Modus auf "Standalone" gesetzt und eine Warnung in die Log-Ausgabe geschrieben.
      *
-     * @return Map mit den Verbindungs-Parametern.
+     * @return Map mit den Parametern der Verbindung.
      * @throws PollingClusterKonfigurationException falls eine JMX-URL nicht korrekt gebildet wurde.
      */
     private Map<String, JMXConnectionParameter> leseJmxVerbindungen() {
