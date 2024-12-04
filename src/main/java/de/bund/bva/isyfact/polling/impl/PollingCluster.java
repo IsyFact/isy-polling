@@ -17,7 +17,7 @@
 package de.bund.bva.isyfact.polling.impl;
 
 
-import de.bund.bva.isyfact.datetime.util.DateTimeUtil;
+import de.bund.bva.isyfact.util.datetime.DateTimeUtil;
 
 import java.util.ArrayList;
 import java.util.List;

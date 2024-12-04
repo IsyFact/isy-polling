@@ -16,10 +16,10 @@
  */
 package de.bund.bva.isyfact.polling;
 
-import de.bund.bva.isyfact.datetime.util.DateTimeUtil;
 import de.bund.bva.isyfact.polling.common.exception.PollingClusterKonfigurationException;
 import de.bund.bva.isyfact.polling.common.exception.PollingClusterUnbekanntException;
 import de.bund.bva.isyfact.polling.common.konstanten.EreignisSchluessel;
+import de.bund.bva.isyfact.util.datetime.DateTimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
