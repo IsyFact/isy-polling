@@ -17,58 +17,59 @@
 package de.bund.bva.isyfact.polling.impl;
 
 
+import de.bund.bva.isyfact.util.datetime.DateTimeUtil;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import de.bund.bva.isyfact.datetime.util.DateTimeUtil;
 
 /**
  * Ein Polling-Cluster besteht aus Menge von Servern, die jeweils die gleiche Nachrichtenquelle abfragen
  * und wird durch eine innerhalb der Anwendung eindeutige Id identifiziert.
  * <br>
  * Diese Klasse enthält die beschreibenden Attribute eines Polling-Clusters.
- *
  */
 class PollingCluster {
 
-    /** ID des Polling-Clusters. */
-    private String clusterId;
-
-    /** Wartezeit bis zur Übernahme der Polling-Aktivität in Sekunden. */
-    private int wartezeit;
-
-    /** Name des Clusters. Dieser Name wird zur Bildung der MBean-Identifikation verwendet. */
-    private String clusterName;
+    /**
+     * ID des Polling-Clusters.
+     */
+    final private String clusterId;
 
     /**
-     * Liste der der Verbindungsangaben zu den JMX-Services der Anwendungen,
+     * Wartezeit bis zur Übernahme der Polling-Aktivität in Sekunden.
+     */
+    final private int wartezeit;
+
+    /**
+     * Name des Clusters. Dieser Name wird zur Bildung der MBean-Identifikation verwendet.
+     */
+    final private String clusterName;
+    /**
+     * MBean-Objekt-Name. Wird aus der Cluster-Id abgeleitet
+     */
+    private final String mBeanObjektName;
+    /**
+     * Liste der Verbindungsangaben zu den JMX-Services der Anwendungen,
      * die außer der eigenen Anwendung noch zu diesem Polling-Cluster gehören.
      */
     private List<JMXConnectionParameter> jmxConnectionParameterListe = new ArrayList<>(5);
-
-    /** MBean-Objekt-Name. Wird aus der Cluster-Id abgeleitet */
-    private String mBeanObjektName;
-
-    /** Zeitstempel der letzten durchgeführten Polling-Aktivität. */
+    /**
+     * Zeitstempel der letzten durchgeführten Polling-Aktivität.
+     */
     private long zeitstempel;
 
 
     /**
      * Erzeugt einen neuen Polling-Cluster.
      *
-     * @param jmxDomain
-     *          Domain-Name für die JMX-MBeans.
-     * @param clusterId
-     *          ID des Polling-Clusters.
-     * @param clusterName
-     *          Name des Clusters. Dieser Name wird zur Bildung der MBean-Identifikation verwendet.
-     * @param wartezeit
-     *          Wartezeit bis zur Übernahme der Polling-Aktivität in Sekunden.
-     * @param jmxConnectionParameterListe
-     *          Liste mit Verbindungsangaben.
+     * @param jmxDomain                   Domain-Name für die JMX-MBeans.
+     * @param clusterId                   ID des Polling-Clusters.
+     * @param clusterName                 Name des Clusters. Dieser Name wird zur Bildung der MBean-Identifikation verwendet.
+     * @param wartezeit                   Wartezeit bis zur Übernahme der Polling-Aktivität in Sekunden.
+     * @param jmxConnectionParameterListe Liste mit Verbindungsangaben.
      */
     PollingCluster(String jmxDomain, String clusterId, String clusterName, int wartezeit,
-        List<JMXConnectionParameter> jmxConnectionParameterListe) {
+                   List<JMXConnectionParameter> jmxConnectionParameterListe) {
 
         if (clusterId == null) {
             throw new IllegalArgumentException("Die ClusterId darf nicht leer sein!");
@@ -105,6 +106,7 @@ class PollingCluster {
 
     /**
      * Liefert das Feld 'clusterName' zurück.
+     *
      * @return Wert von clusterName
      */
     public String getClusterName() {
@@ -127,14 +129,15 @@ class PollingCluster {
      * @return Array mit JMX-Verbindungsangaben.
      */
     JMXConnectionParameter[] getJmxConnectionParameter() {
-        if (jmxConnectionParameterListe.size() == 0) {
+        if (jmxConnectionParameterListe.isEmpty()) {
             return new JMXConnectionParameter[0];
         }
-        return jmxConnectionParameterListe.toArray(new JMXConnectionParameter[jmxConnectionParameterListe.size()]);
+        return jmxConnectionParameterListe.toArray(new JMXConnectionParameter[0]);
     }
 
     /**
      * Liefert das Feld 'mBeanObjektName' zurück.
+     *
      * @return Wert von mBeanObjektName
      */
     String getMBeanObjektName() {

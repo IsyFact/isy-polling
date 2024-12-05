@@ -16,11 +16,16 @@
  */
 package de.bund.bva.isyfact.polling.impl;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import de.bund.bva.isyfact.polling.PollingVerwalter;
+import de.bund.bva.isyfact.polling.common.exception.PollingClusterKonfigurationException;
+import de.bund.bva.isyfact.polling.common.exception.PollingClusterUnbekanntException;
+import de.bund.bva.isyfact.polling.common.exception.PollingUeberpruefungTechnicalException;
+import de.bund.bva.isyfact.polling.common.konstanten.EreignisSchluessel;
+import de.bund.bva.isyfact.polling.common.konstanten.Fehlerschluessel;
+import de.bund.bva.isyfact.polling.config.IsyPollingProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 
 import javax.management.AttributeNotFoundException;
 import javax.management.InstanceNotFoundException;
@@ -31,35 +36,35 @@ import javax.management.ObjectName;
 import javax.management.ReflectionException;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
-
-import org.springframework.beans.factory.InitializingBean;
-
-import de.bund.bva.isyfact.logging.IsyLogger;
-import de.bund.bva.isyfact.logging.IsyLoggerFactory;
-import de.bund.bva.isyfact.polling.PollingVerwalter;
-import de.bund.bva.isyfact.polling.common.exception.PollingClusterKonfigurationException;
-import de.bund.bva.isyfact.polling.common.exception.PollingClusterUnbekanntException;
-import de.bund.bva.isyfact.polling.common.exception.PollingUeberpruefungTechnicalException;
-import de.bund.bva.isyfact.polling.common.konstanten.EreignisSchluessel;
-import de.bund.bva.isyfact.polling.common.konstanten.Fehlerschluessel;
-import de.bund.bva.isyfact.polling.config.IsyPollingProperties;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Implementierung der Komponente PollingVerwalter.
- *
  */
 public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean {
 
-    /** Der Logger dieser Klasse. */
-    private static final IsyLogger LOG = IsyLoggerFactory.getLogger(PollingVerwalter.class);
+    /**
+     * Der Logger dieser Klasse.
+     */
+    private static final Logger LOG = LoggerFactory.getLogger(PollingVerwalter.class);
 
-    /** Name des MBean-Attributs "ZeitraumLetztePollingAktivitaet". */
+    /**
+     * Name des MBean-Attributs "ZeitraumLetztePollingAktivitaet".
+     */
     private static final String ZEITRAUM_LETZTE_POLLING_AKTIVITAET = "ZeitraumLetztePollingAktivitaet";
 
-    /** Liste der verwalteten Polling-Cluster. */
+    /**
+     * Liste der verwalteten Polling-Cluster.
+     */
     private Map<String, PollingCluster> pollingClusterMap;
 
-    /** Zugriff auf die Konfiguration. */
+    /**
+     * Zugriff auf die Konfiguration.
+     */
     private IsyPollingProperties isyPollingProperties;
 
     /**
@@ -69,18 +74,16 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
     private boolean modusStandalone;
 
     /**
-     * Liefert einen PolligCluster zur angegebenen Id.
+     * Liefert einen PollingCluster zur angegebenen Id.
      *
-     * @param clusterId
-     *            ID des zu ermittelnden Polling-Clusters.
-     *
+     * @param clusterId ID des zu ermittelnden Polling-Clusters.
      * @return Polling-Cluster.
      */
     private PollingCluster getPollingCluster(String clusterId) {
         PollingCluster ergebnis = this.pollingClusterMap.get(clusterId);
         if (ergebnis == null) {
             throw new PollingClusterUnbekanntException(Fehlerschluessel.MSG_POLLING_CLUSTER_UBEKANNT,
-                clusterId);
+                    clusterId);
         }
         return ergebnis;
     }
@@ -109,18 +112,18 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
 
             try {
                 zeitraum = getZeitraumLetztePollingAktivitaet(verbindungsparameter, clusterId,
-                    pollingCluster.getMBeanObjektName());
+                        pollingCluster.getMBeanObjektName());
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Zeitraum seit letzter Polling-Aktivitaet für Cluster-ID " + clusterId
-                        + ", Knoten-ID " + verbindungsparameter.getId() + ", URL "
-                        + verbindungsparameter.getJmxServiceUrl() + ": "
-                        + (zeitraum == Long.MAX_VALUE ? "nie" : zeitraum + " ms"));
+                            + ", Knoten-ID " + verbindungsparameter.getId() + ", URL "
+                            + verbindungsparameter.getJmxServiceUrl() + ": "
+                            + (zeitraum == Long.MAX_VALUE ? "nie" : zeitraum + " ms"));
                 }
             } catch (PollingUeberpruefungTechnicalException e) {
                 LOG.error("PollingUeberpruefungTechnicalException", e);
                 zeitraum = Long.MAX_VALUE;
             }
-            if (zeitraum < (pollingCluster.getWartezeit() * 1000)) {
+            if (zeitraum < (pollingCluster.getWartezeit() * 1000L)) {
                 pollingAktiv = false;
                 break;
             }
@@ -136,24 +139,21 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
      * Liefert den Zeitraum in Millisekunden, der seit der letzten Ausführung des Pollings im System unter der
      * angegebenen URL vergangen ist.
      *
-     * @param verbindungsparameter
-     *            des zu prüfenden Systems.
-     * @param clusterId
-     *            Name des Polling-Clusters.
-     * @param mBeanObjektName
-     *            Name der MBean
+     * @param verbindungsparameter des zu prüfenden Systems.
+     * @param clusterId            Name des Polling-Clusters.
+     * @param mBeanObjektName      Name der MBean
      * @return Zeitraum in ms seit der letzten Ausführung des Pollings.
      */
     private long getZeitraumLetztePollingAktivitaet(JMXConnectionParameter verbindungsparameter,
-        String clusterId, String mBeanObjektName) {
+                                                    String clusterId, String mBeanObjektName) {
 
-        long ergebnis = Long.MAX_VALUE;
+        long ergebnis;
 
         JMXConnector jmxc = null;
         try {
 
             jmxc = JMXConnectorFactory.connect(verbindungsparameter.getJmxServiceUrl(),
-                verbindungsparameter.getEnvironment());
+                    verbindungsparameter.getEnvironment());
             MBeanServerConnection mbsc = jmxc.getMBeanServerConnection();
 
             ObjectName mbeanName = new ObjectName(mBeanObjektName);
@@ -161,23 +161,23 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
 
         } catch (MalformedObjectNameException e) {
             throw new PollingClusterKonfigurationException(Fehlerschluessel.MSG_MBEAN_OBJEKT_NAME_FEHLERHAFT,
-                mBeanObjektName);
+                    mBeanObjektName);
         } catch (NullPointerException e) {
             throw new PollingClusterKonfigurationException(Fehlerschluessel.MSG_MBEAN_OBJEKT_NAME_LEER);
         } catch (IOException e) {
             throw new PollingUeberpruefungTechnicalException(Fehlerschluessel.MSG_VERBINDUNGSFEHLER, e,
-                verbindungsparameter.getIpAdressePort(), clusterId);
+                    verbindungsparameter.getIpAdressePort(), clusterId);
         } catch (AttributeNotFoundException e) {
             throw new PollingUeberpruefungTechnicalException(
-                Fehlerschluessel.MSG_MBEAN_ATTRIBUT_NICHT_GEFUNDEN, e, ZEITRAUM_LETZTE_POLLING_AKTIVITAET,
-                verbindungsparameter.getIpAdressePort());
+                    Fehlerschluessel.MSG_MBEAN_ATTRIBUT_NICHT_GEFUNDEN, e, ZEITRAUM_LETZTE_POLLING_AKTIVITAET,
+                    verbindungsparameter.getIpAdressePort());
         } catch (InstanceNotFoundException e) {
             throw new PollingUeberpruefungTechnicalException(
-                Fehlerschluessel.MSG_MBEAN_INSTANZ_NICHT_GEFUNDEN, e, mBeanObjektName,
-                verbindungsparameter.getIpAdressePort());
+                    Fehlerschluessel.MSG_MBEAN_INSTANZ_NICHT_GEFUNDEN, e, mBeanObjektName,
+                    verbindungsparameter.getIpAdressePort());
         } catch (MBeanException | ReflectionException e) {
             throw new PollingUeberpruefungTechnicalException(Fehlerschluessel.MSG_MBEAN_ZUGRIFF_FEHLER, e,
-                mBeanObjektName, verbindungsparameter.getIpAdressePort());
+                    mBeanObjektName, verbindungsparameter.getIpAdressePort());
         } finally {
             try {
                 if (jmxc != null) {
@@ -185,7 +185,7 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
                 }
             } catch (IOException e) {
                 LOG.error(EreignisSchluessel.JMX_VERBINDUNG_NICHT_GESCHLOSSEN,
-                    "JMX-Verbindung konnte nicht geschlossen werden.", e);
+                        "JMX-Verbindung konnte nicht geschlossen werden.", e);
             }
         }
 
@@ -222,12 +222,13 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
      * {@inheritDoc}
      */
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         this.pollingClusterMap = lesePollingCluster();
     }
 
     /**
      * Liest die Konfiguration aus und baut eine Map mit Polling-Clustern auf.
+     *
      * @return Map mit den Polling-Clustern.
      */
     private Map<String, PollingCluster> lesePollingCluster() {
@@ -235,7 +236,7 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
         // JMX-Verbindungen lesen und Polling-Modus ermitteln.
         Map<String, JMXConnectionParameter> jmxVerbindungenMap = leseJmxVerbindungen();
 
-        // Im Standalone-Modus wird keine Clusterkonfiguration benötigt.
+        // Im Standalone-Modus wird keine Cluster-Konfiguration benötigt.
         if (modusStandalone) {
             return clusterMap;
         }
@@ -254,7 +255,7 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
                     JMXConnectionParameter jmxConnectionParameter = jmxVerbindungenMap.get(jmxVerbindung);
                     if (jmxConnectionParameter == null) {
                         throw new PollingClusterKonfigurationException(
-                            Fehlerschluessel.MSG_UNBEKANNTE_VERBINDUNGSZUORDNUNG, jmxVerbindung, clusterId);
+                                Fehlerschluessel.MSG_UNBEKANNTE_VERBINDUNGSZUORDNUNG, jmxVerbindung, clusterId);
                     }
                     jmxParameterListe.add(jmxConnectionParameter);
                 }
@@ -262,8 +263,8 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
 
             // Polling-Cluster erzeugen
             PollingCluster pollingCluster = new PollingCluster(isyPollingProperties.getJmx().getDomain(), clusterId, clusterName,
-                cluster.getWartezeit(),
-                jmxParameterListe);
+                    cluster.getWartezeit(),
+                    jmxParameterListe);
             clusterMap.put(clusterId, pollingCluster);
         });
 
@@ -274,10 +275,8 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
      * Ermittelt die JMX-Verbindungsparameter aus der Konfiguration. Sind keine JMX-Verbindungen konfiguriert,
      * wird der Polling-Modus auf "Standalone" gesetzt und eine Warnung in die Log-Ausgabe geschrieben.
      *
-     * @return Map mit den VerbindungsParametern.
-     *
-     * @throws PollingClusterKonfigurationException
-     *             falls eine JMX-URL nicht korrekt gebildet wurde.
+     * @return Map mit den Parametern der Verbindung.
+     * @throws PollingClusterKonfigurationException falls eine JMX-URL nicht korrekt gebildet wurde.
      */
     private Map<String, JMXConnectionParameter> leseJmxVerbindungen() {
         Map<String, JMXConnectionParameter> jmxConnectionMap = new HashMap<>();
@@ -286,8 +285,8 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
         if (isyPollingProperties.getJmx().getVerbindungen().isEmpty()) {
             modusStandalone = true;
             LOG.warn(EreignisSchluessel.KEIN_JMX_VERBINDUNGS_PARAM,
-                "Für das Polling der Anwendung wurden keine JMX-Verbindungsparameter angegeben! "
-                    + "Der Polling-Modus wurde auf \"Standalone\" gesetzt!");
+                    "Für das Polling der Anwendung wurden keine JMX-Verbindungsparameter angegeben! "
+                            + "Der Polling-Modus wurde auf \"Standalone\" gesetzt!");
             return jmxConnectionMap;
         }
 

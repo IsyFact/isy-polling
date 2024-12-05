@@ -1,8 +1,7 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-orange)](https://opensource.org/licenses/Apache-2.0)
 ![GitHub Sprache](https://img.shields.io/badge/Language-Java_17-orange)
-![GitHub IsyFact](https://img.shields.io/badge/IsyFact-IsyLogging_3.0.0-blue)
-![GitHub IsyFact](https://img.shields.io/badge/IsyFact-IsyExceptionCore_3.0.0-blue)
-![GitHub IsyFact](https://img.shields.io/badge/IsyFact-IsyDatetime_3.0.0-blue)
+![GitHub IsyFact](https://img.shields.io/badge/IsyFact-IsyDatetime_4.0.0-blue)
+![GitHub IsyFact](https://img.shields.io/badge/IsyFact-IsyUtil_4.0.0-blue)
 
 # isy-polling
 
@@ -22,11 +21,13 @@ Unterstützung. Zusätzlich existieren Methoden und Klassen zur Konfiguration un
 in Spring-Anwendungen.
 
 ### Mithelfen
+
 Wir freuen uns über Beiträge zur Weiterentwicklung von isy-polling.
 
 ### Lizenz
 
-Dieses Projekt ist unter der Apache-2-Lizenz lizenziert. Weitere Informationen findest du in der [Lizenzdatei](license/LICENSE).
+Dieses Projekt ist unter der Apache-2-Lizenz lizenziert. Weitere Informationen findest du in
+der [Lizenzdatei](license/LICENSE).
 
 ### Kontakt
 

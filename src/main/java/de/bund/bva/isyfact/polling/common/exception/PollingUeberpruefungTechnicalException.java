@@ -16,14 +16,18 @@
  */
 package de.bund.bva.isyfact.polling.common.exception;
 
+import java.io.Serial;
+
 /**
- * Diese Exception signalisiert einen Technischen Fehler bei der Überprüfung des 
+ * Diese Exception signalisiert einen technischen Fehler bei der Überprüfung des
  * Polling-Status.
- * 
  */
 public class PollingUeberpruefungTechnicalException extends PollingTechnicalRuntimeException {
 
-    /** SerialVersionUID. **/
+    /**
+     * SerialVersionUID.
+     **/
+    @Serial
     private static final long serialVersionUID = 0L;
 
     /**
@@ -32,20 +36,17 @@ public class PollingUeberpruefungTechnicalException extends PollingTechnicalRunt
      * <p>
      * Anmerkung: Der Fehlertext von <code>cause</code> (dem Grund) ist <i>nicht</i> automatisch mit dem
      * übergebenen Fehlertext verbunden.
-     * 
-     * @param ausnahmeID
-     *            Die Ausnahme-ID. Der Schlüssel, welcher verwendet wird, um einen Nachrichtentext, welcher
-     *            als Fehler-Nachricht für die Exception verwendet wird aus einem ResourceBundle zu laden.
-     * @param parameter
-     *            Die Parameter. Parameter für die möglichen Variablen in einer Fehler-Nachricht.
-     *            <tt>null</tt> als Wert ist erlaubt und bedeutet, dass kein Variablen zu ersetzen sind.
-     * @param throwable
-     *            Der Grund. Throwable wird gespeichert für die spätere Nutzung durch die Methode
-     *            {@link #getCause()}. <tt>null</tt> als Wert ist erlaubt und bedeutet, dass kein Grund
-     *            existiert oder der Grund nicht bekannt ist.
+     *
+     * @param ausnahmeID Die Ausnahme-ID. Der Schlüssel, welcher verwendet wird, um einen Nachrichtentext, welcher
+     *                   als Fehler-Nachricht für die Exception verwendet wird aus einem ResourceBundle zu laden.
+     * @param parameter  Die Parameter. Parameter für die möglichen Variablen in einer Fehler-Nachricht.
+     *                   <tt>null</tt> als Wert ist erlaubt und bedeutet, dass keine Variablen zu ersetzen sind.
+     * @param throwable  Der Grund. Throwable wird gespeichert für die spätere Nutzung durch die Methode
+     *                   {@link #getCause()}. <tt>null</tt> als Wert ist erlaubt und bedeutet, dass kein Grund
+     *                   existiert oder der Grund nicht bekannt ist.
      */
     public PollingUeberpruefungTechnicalException(String ausnahmeID, Throwable throwable,
-        String... parameter) {
+                                                  String... parameter) {
         super(ausnahmeID, throwable, parameter);
     }
 }

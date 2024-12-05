@@ -16,10 +16,14 @@
  */
 package de.bund.bva.isyfact.polling.impl;
 
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-
+import de.bund.bva.isyfact.datetime.test.TestClock;
+import de.bund.bva.isyfact.polling.PollingMBean;
+import de.bund.bva.isyfact.polling.PollingVerwalter;
+import de.bund.bva.isyfact.polling.autoconfigure.IsyPollingAutoConfiguration;
+import de.bund.bva.isyfact.polling.config.IsyPollingProperties;
+import de.bund.bva.isyfact.polling.test.AbstractPollingTest;
+import de.bund.bva.isyfact.polling.test.TestConfig;
+import de.bund.bva.isyfact.util.datetime.DateTimeUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,21 +37,16 @@ import org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource;
 import org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler;
 import org.springframework.jmx.support.RegistrationPolicy;
 
-import de.bund.bva.isyfact.datetime.test.TestClock;
-import de.bund.bva.isyfact.datetime.util.DateTimeUtil;
-import de.bund.bva.isyfact.polling.PollingMBean;
-import de.bund.bva.isyfact.polling.PollingVerwalter;
-import de.bund.bva.isyfact.polling.autoconfigure.IsyPollingAutoConfiguration;
-import de.bund.bva.isyfact.polling.config.IsyPollingProperties;
-import de.bund.bva.isyfact.polling.test.AbstractPollingTest;
-import de.bund.bva.isyfact.polling.test.TestConfig;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Tests für den Polling Verwalter.
- *
+ * <p>
  * Damit die Tests funktionieren, muss JMX über die folgenden Startparameter der VM
  * aktiviert werden:
- *
+ * <p>
  * -Dcom.sun.management.jmxremote
  * -Dcom.sun.management.jmxremote.port=9010
  * -Dcom.sun.management.jmxremote.local.only=false
@@ -55,22 +54,22 @@ import de.bund.bva.isyfact.polling.test.TestConfig;
  * -Dcom.sun.management.jmxremote.authenticate=false
  */
 @SpringBootTest(classes = {
-    TestConfig.class, PollingVerwalterDefaultJmxConnTest.TestConfig.class }, webEnvironment = SpringBootTest.WebEnvironment.NONE, properties = {
-    "isy.logging.anwendung.name = test",
-    "isy.logging.anwendung.typ = test",
-    "isy.logging.anwendung.version = test",
+        TestConfig.class, PollingVerwalterDefaultJmxConnTest.TestConfig.class}, webEnvironment = SpringBootTest.WebEnvironment.NONE, properties = {
+        "isy.logging.anwendung.name = test",
+        "isy.logging.anwendung.typ = test",
+        "isy.logging.anwendung.version = test",
 
-    "isy.polling.jmx.verbindungen.SERVER1.host = localhost",
-    "isy.polling.jmx.verbindungen.SERVER1.port = 9010",
-    "isy.polling.jmx.verbindungen.SERVER1.benutzer = server1",
-    "isy.polling.jmx.verbindungen.SERVER1.passwort = server1",
+        "isy.polling.jmx.verbindungen.SERVER1.host = localhost",
+        "isy.polling.jmx.verbindungen.SERVER1.port = 9010",
+        "isy.polling.jmx.verbindungen.SERVER1.benutzer = server1",
+        "isy.polling.jmx.verbindungen.SERVER1.passwort = server1",
 
-    "isy.polling.jmx.verbindungen.SERVER2.host = localhost",
-    "isy.polling.jmx.verbindungen.SERVER2.port = 9010",
-    "isy.polling.jmx.verbindungen.SERVER2.benutzer = SERVER2",
-    "isy.polling.jmx.verbindungen.SERVER2.passwort = SERVER2",
+        "isy.polling.jmx.verbindungen.SERVER2.host = localhost",
+        "isy.polling.jmx.verbindungen.SERVER2.port = 9010",
+        "isy.polling.jmx.verbindungen.SERVER2.benutzer = SERVER2",
+        "isy.polling.jmx.verbindungen.SERVER2.passwort = SERVER2",
 
-    "isy.polling.cluster.CLUSTER1.name = Name-Cluster1", "isy.polling.cluster.CLUSTER1.wartezeit = 12" })
+        "isy.polling.cluster.CLUSTER1.name = Name-Cluster1", "isy.polling.cluster.CLUSTER1.wartezeit = 12"})
 @ImportAutoConfiguration(IsyPollingAutoConfiguration.class)
 public class PollingVerwalterDefaultJmxConnTest extends AbstractPollingTest {
 
@@ -104,14 +103,13 @@ public class PollingVerwalterDefaultJmxConnTest extends AbstractPollingTest {
 
         // Cluster 1 erneut überprüfen
         Assert.assertTrue("Polling darf gestartet werden", pollingVerwalter.startePolling("CLUSTER1"));
-
     }
 
     @Configuration
     static class TestConfig {
         @Bean
         public MBeanExporter mBeanExporter(@Qualifier("cluster1Monitor") PollingMBean cluster1Monitor,
-            IsyPollingProperties isyPollingProperties) {
+                                           IsyPollingProperties isyPollingProperties) {
             MBeanExporter mBeanExporter = new MBeanExporter();
             mBeanExporter.setRegistrationPolicy(RegistrationPolicy.REPLACE_EXISTING);
             mBeanExporter.setAssembler(new MetadataMBeanInfoAssembler(new AnnotationJmxAttributeSource()));
@@ -119,7 +117,7 @@ public class PollingVerwalterDefaultJmxConnTest extends AbstractPollingTest {
 
             Map<String, Object> mBeans = new HashMap<>();
             String key = "de.bund.bva.isyfact.polling:type=PollingStatus,name=\"Polling-Aktivitaet-"
-                + isyPollingProperties.getCluster().get("CLUSTER1").getName() + "\"";
+                    + isyPollingProperties.getCluster().get("CLUSTER1").getName() + "\"";
 
             mBeans.put(key, cluster1Monitor);
 
