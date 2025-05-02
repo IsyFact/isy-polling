@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -14,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class IsyPollingProperties {
 
+    @Valid
     private final Jmx jmx = new Jmx();
 
     private final Map<String, Cluster> cluster = new HashMap<>();
@@ -26,9 +28,9 @@ public class IsyPollingProperties {
         return cluster;
     }
 
-
     public static class Jmx {
 
+        @Valid
         private final Map<String, Verbindung> verbindungen = new HashMap<>();
 
         private String domain = "de.bund.bva.isyfact.polling";
@@ -44,7 +46,6 @@ public class IsyPollingProperties {
         public Map<String, Verbindung> getVerbindungen() {
             return verbindungen;
         }
-
 
         public static class Verbindung {
             private String host;
