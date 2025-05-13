@@ -1,4 +1,3 @@
-
 /**
  * Annotationen und Interceptoren für das Polling.
  */

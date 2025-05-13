@@ -1,4 +1,3 @@
-
 /**
  * Exceptions für das Polling.
  */

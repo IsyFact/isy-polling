@@ -1,4 +1,3 @@
-
 /**
  * Konstantendefinitionen für das Polling.
  */

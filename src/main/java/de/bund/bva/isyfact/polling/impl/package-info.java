@@ -1,4 +1,3 @@
-
 /**
  * Implementierungsklassen für das Polling.
  */

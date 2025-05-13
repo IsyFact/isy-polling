@@ -1,4 +1,3 @@
-
 /**
  * Komponenten der Bibliothek isy-polling.
  */
