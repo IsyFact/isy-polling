@@ -1,5 +1,5 @@
 name: polling
 title: Baustein Polling
-start_page: ROOT:konzept/master.adoc
+start_page: ROOT:konzept.adoc
 nav:
 - modules/ROOT/nav.adoc
