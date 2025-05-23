@@ -1,7 +1,5 @@
-name: isy-polling-doc
-title: isy-polling
-version: '5.0.0 SNAPSHOT'
-display_version: '5.0.0 SNAPSHOT'
+name: polling
+title: Baustein Polling
 start_page: ROOT:konzept/master.adoc
 nav:
 - modules/ROOT/nav.adoc
