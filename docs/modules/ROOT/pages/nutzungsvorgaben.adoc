@@ -1,6 +1,12 @@
-= Nutzungsvorgaben Polling: Inhalt
+= Nutzungsvorgaben Polling
 
-// tag::inhalt[]
+include::partial$library.adoc[]
+
+Im xref:konzept.adoc[] werden die konzeptionellen Grundlagen und Vorgaben für Polling definiert, um eine einheitliche Umsetzung in der gesamten xref:glossary::terms-definitions.adoc#glossar-anwendungslandschaft[Anwendungslandschaft] zu gewährleisten.
+Dieses Dokument beschreibt die Verwendung der Bibliothek `isy-polling`, die dieses Verfahren implementiert.
+
+Dieses Dokument richtet sich an Entwickler und Chefdesigner, die Polling-Funktionalität in eine Anwendung integrieren wollen.
+
 [[die-bibliothek-isy-polling]]
 == Die Bibliothek isy-polling
 
@@ -59,10 +65,10 @@ Welche der beiden Möglichkeiten gewählt wird, hängt vom konkreten Anwendungsf
 [[lastverteilung-ueber-cluster-definition]]
 ==== Lastverteilung über Cluster-Definition
 
-Wird ein Polling-Cluster je zu pollender Datenquelle festgelegt, so kann eine gewisse Lastverteilung erreicht werden wie folgendes Beispiel zeigt:
+Wird ein Polling-Cluster je zu pollender Datenquelle festgelegt, so kann eine gewisse Lastverteilung erreicht werden.
+Das folgende Beispiel zeigt, dass E-Mail-Konten parallel von zwei Instanzen abgearbeitet werden können.
 
-[underline]#Beispiel#:
-
+====
 In einer Anwendung ist ein Verarbeitungszyklus so realisiert, dass drei E-Mail-Konten nacheinander abgefragt werden.
 Der Verarbeitungszyklus wird periodisch über einen Timer gestartet.
 Es gibt zwei Instanzen der Anwendung.
@@ -70,24 +76,22 @@ Wird für jedes E-Mail-Konto ein eigener Polling-Cluster definiert, so ist der A
 
 Der Timer im Knoten 1 startet den Verarbeitungszyklus.
 Es wird zunächst der Polling-Verwalter gefragt, ob das Polling für den Cluster 1 gestartet werden darf.
-Knoten 2 hat das Polling noch nicht begonnen, so dass der Polling-Verwalter im Knoten 1 die Verarbeitung der Nachrichten aus dem E-Mail-Konto 1 erlaubt.
+Knoten 2 hat das Polling noch nicht begonnen, sodass der Polling-Verwalter im Knoten 1 die Verarbeitung der Nachrichten aus dem E-Mail-Konto 1 erlaubt.
 
 Zwischenzeitlich startet auch der Timer im Knoten 2 einen Verarbeitungszyklus.
 Der Polling-Verwalter im Knoten 2 erkennt, dass das Polling im Knoten 1 für den Cluster 1 bereits aktiv ist und verweigert die Erlaubnis, die Nachrichten des E-Mail-Konto 1 abzuarbeiten.
-Die Anwendung fragt den Polling-Verwalter daher als nächstes um Erlaubnis, das Polling für den Cluster 2 durchzuführen.
+Die Anwendung fragt den Polling-Verwalter daher als Nächstes um Erlaubnis, das Polling für den Cluster 2 durchzuführen.
 Das wird erlaubt und Knoten 2 verarbeitet die Nachrichten des E-Mail-Konto 2.
 
 Während Knoten 2 noch mit den Nachrichten des E-Mail-Konto 2 beschäftigt ist, hat Knoten 1 alle Nachrichten aus E-Mail-Konto 1 verarbeitet.
 Er fragt jetzt den Polling-Verwalter um Erlaubnis, das Polling für den Cluster 2 durchzuführen.
 Die Erlaubnis wird verweigert, weil Knoten 2 bereits damit beschäftigt ist.
-Daher fragt die Anwendung als nächstes um Erlaubnis, das Polling für den Cluster 3 durchzuführen.
+Daher fragt die Anwendung als Nächstes um Erlaubnis, das Polling für den Cluster 3 durchzuführen.
 Das wird erlaubt und Knoten 1 verarbeitet die Nachrichten aus dem E-Mail-Konto 3.
 
 Knoten 2 ist mit der Verarbeitung des E-Mail-Konto 2 fertig und möchte nun E-Mail-Konto 3 verarbeiten, was aber verweigert wird, da Knoten 1 bereits damit beschäftigt ist.
 Dies schließt den Verarbeitungszyklus im Knoten 2 ab.
-
-Dieses Beispiel zeigt, dass E-Mail-Konten parallel von beiden Instanzen abgearbeitet werden können.
-
+====
 
 [[konfigurationsklassen]]
 ==== Konfiguration über Properties
@@ -215,7 +219,7 @@ Sie sind vielmehr eng mit der Anwendungslogik verknüpft und sollten daher nicht
 
 In <<listing-BeispielPollingKonfigurationLastverteilung>> ist die Polling-Konfiguration für zwei zu pollende Datenquellen mit jeweils eigenem Polling-Cluster aufgeführt.
 Die beiden Cluster bestehen jeweils aus den zwei gleichen Instanzen der Anwendung.
-Wie in Kapitel xref:nutzungsvorgaben/master.adoc#lastverteilung-ueber-cluster-definition[Lastverteilung über Cluster Definition] beschrieben, kann so eine Lastverteilung erfolgen.
+Wie in Kapitel <<lastverteilung-ueber-cluster-definition>> beschrieben, kann so eine Lastverteilung erfolgen.
 
 .Beispiel Polling Konfiguration mit Lastverteilung
 [id="listing-BeispielPollingKonfigurationLastverteilung",reftext="{listing-caption} {counter:listings }"]
@@ -366,5 +370,3 @@ public void doPollingAktion () {
   }
 // ...
 ----
-
-// end::inhalt[]

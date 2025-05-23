@@ -64,4 +64,4 @@ In <<polling-nachrichten-tabelle>> wird das noch einmal illustriert.
 [id="polling-nachrichten-tabelle",reftext="{figure-caption} {counter:figures}"]
 image::konzept/polling-nachrichten-tabelle.png[align="center",width=50%]
 
-Näheres zu den Nutzungsvorgaben des Bausteins findet sich in den xref:nutzungsvorgaben/master.adoc[].
+Näheres zu den Nutzungsvorgaben des Bausteins findet sich in den xref:nutzungsvorgaben.adoc[].
