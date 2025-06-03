@@ -47,8 +47,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <isy-datetime.version>4.0.0-SNAPSHOT</isy-datetime.version>
-        <isy-util.version>4.0.0-SNAPSHOT</isy-util.version>
+        <isy-datetime.version>4.0.0</isy-datetime.version>
+        <isy-util.version>4.0.0</isy-util.version>
 
         <logback.version>1.4.14</logback.version>
         <logback-classic.version>1.5.6</logback-classic.version>
@@ -386,7 +386,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.13</version>
+                        <version>1.7.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
