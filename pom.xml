@@ -15,7 +15,7 @@
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
 
@@ -47,7 +47,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <isy-datetime.version>4.0.0-SNAPSHOT</isy-datetime.version>
+        <isy-datetime.version>4.1.0-SNAPSHOT</isy-datetime.version>
         <isy-util.version>5.0.0-SNAPSHOT</isy-util.version>
 
         <logback.version>1.4.14</logback.version>
