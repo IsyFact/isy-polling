@@ -1,6 +1,0 @@
-[[changelog]]
-= Changelog
-
-*Änderungen IsyFact 4.0.0*
-
-
