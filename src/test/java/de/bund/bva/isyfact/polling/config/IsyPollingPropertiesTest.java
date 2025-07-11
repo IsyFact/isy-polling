@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.properties.ConfigurationPropertiesBindException;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
@@ -65,6 +66,8 @@ class IsyPollingPropertiesTest {
                 .getFailure()
                 .cause()
                 .isInstanceOf(BeanCreationException.class)
+                .cause()
+                .hasCauseInstanceOf(ConfigurationPropertiesBindException.class)
         );
     }
 
