@@ -1,14 +1,14 @@
 package de.bund.bva.isyfact.polling.test;
 
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public abstract class AbstractPollingTest {
 
     /**
-     * Überprüft den JMX-Status und gibt Informationen auf der Konsole aus.
-     * @return true, falls JMX aktiv ist, false sonst. 
+     * Tests the JMX status and prints informations on the console.
+     * @return true, if JMX is active otherwise false.
      */
     public boolean pruefeJMXStatus() throws Exception {
 

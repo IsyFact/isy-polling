@@ -1,11 +1,10 @@
 package de.bund.bva.isyfact.polling.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import de.bund.bva.isyfact.datetime.test.TestClock;
@@ -13,11 +12,10 @@ import de.bund.bva.isyfact.datetime.util.DateTimeUtil;
 import de.bund.bva.isyfact.polling.PollingVerwalter;
 
 /**
- * Tests für den Polling Verwalter im Standalone-Modus.
+ * Tests for the polling manager in standalone mode.
  * 
- * Damit die Tests funktionieren, muss JMX über die folgenden Startparameter der VM 
- * aktiviert werden:
- * 
+ * To make the tests, this start parameters must be active for JMX:
+ *
  * -Dcom.sun.management.jmxremote
  * -Dcom.sun.management.jmxremote.port=9010
  * -Dcom.sun.management.jmxremote.local.only=false
@@ -36,49 +34,49 @@ public abstract class AbstractPollingStandaloneTest extends AbstractPollingTest 
     @Test
     public void startePollingTest() throws Exception {
 
-        assertTrue("JMX ist nicht gestartet.", pruefeJMXStatus());
+        assertTrue(pruefeJMXStatus(), "JMX ist nicht gestartet.");
 
         TestClock testClock = TestClock.now();
         DateTimeUtil.setClock(testClock);
         
-        // Cluster 1 aktualisieren. Da "Modus Standalone" gesetzt ist, darf das Polling gestartet werden darf.
+        // update Cluster 1. Polling may not be started because of "Modus Standalone".
         pollingVerwalter.aktualisiereZeitpunktLetztePollingAktivitaet("CLUSTER1"); 
-        assertTrue("Polling darf nicht gestartet werden", pollingVerwalter.startePolling("CLUSTER1"));
+        assertTrue(pollingVerwalter.startePolling("CLUSTER1"), "Polling darf nicht gestartet werden");
 
-        // Cluster 2 aktualisieren. Da "Modus Standalone" gesetzt ist, darf das Polling gestartet werden darf.
-        assertTrue("Polling darf nicht gestartet werden", pollingVerwalter.startePolling("CLUSTER2"));
+        // update Cluster 2. Polling may be started because of "Modus Standalone".
+        assertTrue(pollingVerwalter.startePolling("CLUSTER2"), "Polling darf nicht gestartet werden");
 
-        // Einen Teil der Wartezeit verstreichen lassen
+        // pass a part of the waiting time.
         testClock.advanceBy(Duration.ofSeconds(5));
 
-        // Da "Modus Standalone" gesetzt ist, darf für Cluster1 das Polling gestartet werden. 
-        assertTrue("Polling darf gestartet werden", pollingVerwalter.startePolling("CLUSTER1"));
+        // update Cluster 1. Polling may be started because of "Modus Standalone".
+        assertTrue(pollingVerwalter.startePolling("CLUSTER1"), "Polling darf gestartet werden");
         
-        // Rest der Wartezeit verstreichen lassen
+        // pass rest of the waiting time.
         testClock.advanceBy(Duration.ofSeconds(8));
         
-        // Cluster 1 erneut überprüfen
-        assertTrue("Polling darf gestartet werden", pollingVerwalter.startePolling("CLUSTER1"));
+        // check Cluster 1 again
+        assertTrue(pollingVerwalter.startePolling("CLUSTER1"), "Polling darf gestartet werden");
 
-        // Für Cluster 3 ist keine MBean definiert und ein nicht existenter Port. Daher kann die MBean nicht erreicht werden
-        // und das Polling darf ausgeführt werden.
+        // For Cluster 3 is no MBean defined and a not existing port so the MBean is not available
+        // polling may be executed.
         pollingVerwalter.aktualisiereZeitpunktLetztePollingAktivitaet("CLUSTER3"); 
-        assertTrue("Polling darf gestartet werden", pollingVerwalter.startePolling("CLUSTER3"));        
+        assertTrue(pollingVerwalter.startePolling("CLUSTER3"), "Polling darf gestartet werden");        
     }
 
     @Test
     public void annotationTest() {
         
-        // Zeitpunkt der letzten Ausführung merken
+        // save last execution time
         long ausfuehrungszeitpunkt1 = pollingVerwalter.getZeitpunktLetztePollingAktivitaet("CLUSTER1");
-        assertEquals("Zeitpunkt der letzen Ausführung", 0, ausfuehrungszeitpunkt1);
-        // Polling-Aktion ausführen
+        assertEquals(0, ausfuehrungszeitpunkt1, "Zeitpunkt der letzen Ausführung");
+        // execute polling
         pollingAktionAusfuehrer.doPollingAktionClusterKorrekt();
-        // Zeitpunkt der letzten Ausführung lesen
+        // read time of last execution
         long ausfuehrungszeitpunkt2 = pollingVerwalter.getZeitpunktLetztePollingAktivitaet("CLUSTER1");
-        assertEquals("Zeitpunkt der letzen Ausführung", 0, ausfuehrungszeitpunkt2);
+        assertEquals(0, ausfuehrungszeitpunkt2, "Zeitpunkt der letzen Ausführung");
 
-        // Aktion für unbekannten Cluster ausführen
+        // perform actions for unknown cluster
         pollingAktionAusfuehrer.doPollingAktionClusterUnbekannt();
     }   
 }
