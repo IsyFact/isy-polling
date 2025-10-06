@@ -8,8 +8,8 @@ import de.bund.bva.isyfact.polling.config.IsyPollingProperties;
 import de.bund.bva.isyfact.polling.test.AbstractPollingTest;
 import de.bund.bva.isyfact.polling.test.TestConfig;
 import de.bund.bva.isyfact.util.datetime.DateTimeUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
@@ -26,10 +26,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Tests für den Polling Verwalter.
+ * Tests for the polling manager.
  * <p>
- * Damit die Tests funktionieren, muss JMX über die folgenden Startparameter der VM
- * aktiviert werden:
+ * To make the tests, this start parameters must be active for JMX:
  * <p>
  * -Dcom.sun.management.jmxremote
  * -Dcom.sun.management.jmxremote.port=9010
@@ -61,32 +60,32 @@ public class PollingVerwalterDefaultJmxConnTest extends AbstractPollingTest {
     private PollingVerwalter pollingVerwalter;
 
     /**
-     * Testet die Methode "startePolling".
+     * Testing method "startePolling".
      */
     @Test
     public void startePollingTest() throws Exception {
 
-        Assert.assertTrue("JMX ist nicht gestartet.", pruefeJMXStatus());
+        Assertions.assertTrue(pruefeJMXStatus(), "JMX ist nicht gestartet.");
 
         TestClock testClock = TestClock.now();
         DateTimeUtil.setClock(testClock);
 
-        // Cluster 1 aktualisieren. Da der Test lokal ist, führt das dazu, 
-        // dass das Polling nicht gestartet werden darf.
+        // update Cluster 1.
+        // Polling may not be started because the test is local.
         pollingVerwalter.aktualisiereZeitpunktLetztePollingAktivitaet("CLUSTER1");
-        Assert.assertFalse("Polling darf nicht gestartet werden", pollingVerwalter.startePolling("CLUSTER1"));
+        Assertions.assertFalse(pollingVerwalter.startePolling("CLUSTER1"), "Polling darf nicht gestartet werden");
 
-        // Einen Teil der Wartezeit verstreichen lassen
+        // pass a part of the waiting time.
         testClock.advanceBy(Duration.ofSeconds(5));
 
-        // Für Cluster1 darf das Polling immer noch nicht gestartet werden. 
-        Assert.assertFalse("Polling darf nicht gestartet werden", pollingVerwalter.startePolling("CLUSTER1"));
+        // polling for Cluster1 may still not be started
+        Assertions.assertFalse(pollingVerwalter.startePolling("CLUSTER1"), "Polling darf nicht gestartet werden");
 
-        // Rest der Wartezeit verstreichen lassen
+        // pass rest of the waiting time
         testClock.advanceBy(Duration.ofSeconds(8));
 
-        // Cluster 1 erneut überprüfen
-        Assert.assertTrue("Polling darf gestartet werden", pollingVerwalter.startePolling("CLUSTER1"));
+        // check Cluster 1 again
+        Assertions.assertTrue(pollingVerwalter.startePolling("CLUSTER1"), "Polling darf gestartet werden");
     }
 
     @Configuration

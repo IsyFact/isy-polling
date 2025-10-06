@@ -1,5 +1,7 @@
 package de.bund.bva.isyfact.polling.impl;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import de.bund.bva.isyfact.datetime.test.TestClock;
 import de.bund.bva.isyfact.polling.PollingMBean;
 import de.bund.bva.isyfact.polling.PollingVerwalter;
@@ -10,8 +12,8 @@ import de.bund.bva.isyfact.polling.test.AbstractPollingTest;
 import de.bund.bva.isyfact.polling.test.PollingAktionAusfuehrer;
 import de.bund.bva.isyfact.polling.test.TestConfig;
 import de.bund.bva.isyfact.util.datetime.DateTimeUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
@@ -28,10 +30,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Tests für den Polling Verwalter.
+ * Tests for the polling manager.
  * <p>
- * Damit die Tests funktionieren, muss JMX über die folgenden Startparameter der VM
- * aktiviert werden:
+ * To make the tests, this start parameters must be active for JMX:
  * <p>
  * -Dcom.sun.management.jmxremote
  * -Dcom.sun.management.jmxremote.port=9010
@@ -93,60 +94,61 @@ public class PollingVerwalterTest extends AbstractPollingTest {
     private PollingAktionAusfuehrer pollingAktionAusfuehrer;
 
     /**
-     * Testet die Methode "startePolling".
+     * Testing method "startePolling".
      */
     @Test
     public void startePollingTest() throws Exception {
 
-        Assert.assertTrue("JMX ist nicht gestartet.", pruefeJMXStatus());
+        Assertions.assertTrue(pruefeJMXStatus(), "JMX ist nicht gestartet.");
 
         TestClock testClock = TestClock.now();
         DateTimeUtil.setClock(testClock);
 
-        // Cluster 1 aktualisieren. Da der Test lokal ist, führt das dazu, 
-        // dass das Polling nicht gestartet werden darf.
+        // update Cluster 1.
+        // Polling may not be started because the test is local.
         pollingVerwalter.aktualisiereZeitpunktLetztePollingAktivitaet("CLUSTER1");
-        Assert.assertFalse("Polling darf nicht gestartet werden", pollingVerwalter.startePolling("CLUSTER1"));
+        Assertions.assertFalse(pollingVerwalter.startePolling("CLUSTER1"), "Polling darf nicht gestartet werden");
 
-        // Cluster 2 wird nicht aktualisiert. Da der Test lokal ist, führt das dazu, 
-        // dass das Polling gestartet werden darf.
-        Assert.assertTrue("Polling darf gestartet werden", pollingVerwalter.startePolling("CLUSTER2"));
+        // no update for Cluster 2
+        // Polling may not be started because the test is local.
+        Assertions.assertTrue(pollingVerwalter.startePolling("CLUSTER2"), "Polling darf gestartet werden");
 
-        // Einen Teil der Wartezeit verstreichen lassen
+        // pass a part of the waiting time.
         testClock.advanceBy(Duration.ofSeconds(5));
 
-        // Für Cluster1 darf das Polling immer noch nicht gestartet werden. 
-        Assert.assertFalse("Polling darf nicht gestartet werden", pollingVerwalter.startePolling("CLUSTER1"));
+        // polling for Cluster1 may still not be started
+        Assertions.assertFalse(pollingVerwalter.startePolling("CLUSTER1"), "Polling darf nicht gestartet werden");
 
-        // Rest der Wartezeit verstreichen lassen
+        // pass rest of the waiting time
         testClock.advanceBy(Duration.ofSeconds(8));
 
-        // Cluster 1 erneut überprüfen
-        Assert.assertTrue("Polling darf gestartet werden", pollingVerwalter.startePolling("CLUSTER1"));
+        // check Cluster 1 again
+        Assertions.assertTrue(pollingVerwalter.startePolling("CLUSTER1"), "Polling darf gestartet werden");
 
-        // Für Cluster 3 ist keine MBean definiert und ein nicht existenter Port. Daher kann die MBean nicht erreicht werden
-        // und das Polling darf ausgeführt werden.
+        // For Cluster 3 is no MBean defined and a not existing port so the MBean is not available
+        // polling may be executed.
         pollingVerwalter.aktualisiereZeitpunktLetztePollingAktivitaet("CLUSTER3");
-        Assert.assertTrue("Polling darf gestartet werden", pollingVerwalter.startePolling("CLUSTER3"));
+        Assertions.assertTrue(pollingVerwalter.startePolling("CLUSTER3"), "Polling darf gestartet werden");
     }
 
     /**
-     * Testet, ob der Interceptor funktioniert.
+     * Testing the interceptor.
      */
     @Test
     public void annotationTest() {
-        // Zeitpunkt der letzten Ausführung merken
+        // save last execution time
         long ausfuehrungszeitpunkt1 = pollingVerwalter.getZeitpunktLetztePollingAktivitaet("CLUSTER1");
-        // Polling-Aktion ausführen
+        // perform polling
         pollingAktionAusfuehrer.doPollingAktionClusterKorrekt();
-        // Zeitpunkt der letzten Ausführung lesen
+        // read time of last execution
         long ausfuehrungszeitpunkt2 = pollingVerwalter.getZeitpunktLetztePollingAktivitaet("CLUSTER1");
-        Assert.assertTrue("Ausführungszeitpunkt wurde nicht geändert.", ausfuehrungszeitpunkt1 != ausfuehrungszeitpunkt2);
+        Assertions.assertTrue(ausfuehrungszeitpunkt1 != ausfuehrungszeitpunkt2, "Ausführungszeitpunkt wurde nicht geändert.");
     }
 
-    @Test(expected = PollingClusterUnbekanntException.class)
+    @Test
     public void annotationTestClusterUnbekannt() {
-        pollingAktionAusfuehrer.doPollingAktionClusterUnbekannt();
+        assertThrows(PollingClusterUnbekanntException.class, () ->
+            pollingAktionAusfuehrer.doPollingAktionClusterUnbekannt());
     }
 
     @Configuration
