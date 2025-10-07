@@ -11,20 +11,19 @@ import org.springframework.util.ClassUtils;
 import de.bund.bva.isyfact.polling.PollingVerwalter;
 
 /**
- * Interceptor zum Durchführen einer Polling-Aktion.
- * Aktualisiert nach dem Aufruf der eigentlichen Polling-Aktion den
- * Zeitpunkt der letzten Ausführung.
+ * Interceptor for performing a polling action.
+ * Updates the time of the last execution after calling the actual polling action.
  * 
  */
 public class PollingAktionInterceptor implements MethodInterceptor {
 
-    /** Zugriff auf den PollingVerwalter. Wird von Spring gesetzt */
+    /** Access to the PollingVerwalter. Set by Spring. */
     private final PollingVerwalter pollingVerwalter;
 
     /**
-     * Erzeugt einen neuen Interceptor zum Durchführen einer Polling-Aktion.
+     * Creates a new interceptor to perform a polling action.
      *
-     * @param pollingVerwalter der {@link PollingVerwalter}
+     * @param pollingVerwalter the {@link PollingVerwalter}
      */
     public PollingAktionInterceptor(PollingVerwalter pollingVerwalter) {
         this.pollingVerwalter = pollingVerwalter;
@@ -40,7 +39,7 @@ public class PollingAktionInterceptor implements MethodInterceptor {
         try {
             return invocation.proceed();
         } finally {
-            // aktualisiere den Zeitpunkt der letzten Polling-Aktion.
+            // Update the time of the last polling action.
             if (pollingAktion != null) {
                 pollingVerwalter.aktualisiereZeitpunktLetztePollingAktivitaet(pollingAktion.pollingCluster());
             }
@@ -48,18 +47,15 @@ public class PollingAktionInterceptor implements MethodInterceptor {
     }
 
     /**
-     * Ermittelt die PollingAktion-Annotation.
+     * Determines the PollingAktion annotation.
      * 
-     * @param method
-     *          Aufgerufene Methode.
-     * @param targetClass
-     *          Klasse, an der die Methode aufgerufen wurde.
+     * @param method Called Method.
+     * @param targetClass Class in which the method was called.
      * @return Annotation PollingAktion
      */
     private PollingAktion ermittlePollingAktionAnnotation(Method method, Class<?> targetClass) {
 
-        // Strategie für die Ermittlung der Annotation ist aus AnnotationTransactionAttributeSource
-        // übernommen.
+        // The strategy for determining the annotation is taken from AnnotationTransactionAttributeSource.
 
         // Ignore CGLIB subclasses - introspect the actual user class.
         Class<?> userClass = ClassUtils.getUserClass(targetClass);
