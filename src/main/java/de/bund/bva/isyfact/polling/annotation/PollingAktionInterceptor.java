@@ -75,12 +75,6 @@ public class PollingAktionInterceptor implements MethodInterceptor {
             return pollingAktion;
         }
 
-        // Second try is the transaction attribute on the target class.
-        pollingAktion = specificMethod.getDeclaringClass().getAnnotation(PollingAktion.class);
-        if (pollingAktion != null) {
-            return pollingAktion;
-        }
-
         if (specificMethod != method) {
             // Fallback is to look at the original method.
             pollingAktion = method.getAnnotation(PollingAktion.class);
