@@ -7,8 +7,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public abstract class AbstractPollingTest {
 
     /**
-     * Tests the JMX status and prints informations on the console.
-     * @return true, if JMX is active otherwise false.
+     * Tests the JMX status and prints information on the console.
+     * @return true, if JMX is active, otherwise false.
      */
     public boolean pruefeJMXStatus() throws Exception {
 

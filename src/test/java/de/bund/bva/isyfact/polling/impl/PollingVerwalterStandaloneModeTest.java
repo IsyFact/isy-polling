@@ -20,10 +20,9 @@ import de.bund.bva.isyfact.polling.test.AbstractPollingStandaloneTest;
 import de.bund.bva.isyfact.polling.test.TestConfig;
 
 /**
- * Tests für den Polling Verwalter.
+ * Tests for the polling manager.
  *
- * Damit die Tests funktionieren, muss JMX über die folgenden Startparameter der VM
- * aktiviert werden:
+ * For the tests to work, JMX must be enabled using the following VM startup parameters:
  *
  * -Dcom.sun.management.jmxremote
  * -Dcom.sun.management.jmxremote.port=9010
