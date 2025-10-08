@@ -14,7 +14,7 @@ import de.bund.bva.isyfact.polling.PollingVerwalter;
 /**
  * Tests for the polling manager in standalone mode.
  * 
- * To make the tests, this start parameters must be active for JMX:
+ * For the tests to work, JMX must be enabled using the following VM startup parameters:
  *
  * -Dcom.sun.management.jmxremote
  * -Dcom.sun.management.jmxremote.port=9010
@@ -39,17 +39,20 @@ public abstract class AbstractPollingStandaloneTest extends AbstractPollingTest 
         TestClock testClock = TestClock.now();
         DateTimeUtil.setClock(testClock);
         
-        // update Cluster 1. Polling may not be started because of "Modus Standalone".
+        // update Cluster 1
+        // polling is allowed to start, because the modus "standalone" is set
         pollingVerwalter.aktualisiereZeitpunktLetztePollingAktivitaet("CLUSTER1"); 
         assertTrue(pollingVerwalter.startePolling("CLUSTER1"), "Polling darf nicht gestartet werden");
 
-        // update Cluster 2. Polling may be started because of "Modus Standalone".
+        // update Cluster 2
+        // polling is allowed to start, because the modus "standalone" is set
         assertTrue(pollingVerwalter.startePolling("CLUSTER2"), "Polling darf nicht gestartet werden");
 
-        // pass a part of the waiting time.
+        // pass a part of the waiting time
         testClock.advanceBy(Duration.ofSeconds(5));
 
-        // update Cluster 1. Polling may be started because of "Modus Standalone".
+        // update Cluster 1
+        // polling is allowed to start, because the modus "standalone" is set
         assertTrue(pollingVerwalter.startePolling("CLUSTER1"), "Polling darf gestartet werden");
         
         // pass rest of the waiting time.
@@ -58,8 +61,7 @@ public abstract class AbstractPollingStandaloneTest extends AbstractPollingTest 
         // check Cluster 1 again
         assertTrue(pollingVerwalter.startePolling("CLUSTER1"), "Polling darf gestartet werden");
 
-        // For Cluster 3 is no MBean defined and a not existing port so the MBean is not available
-        // polling may be executed.
+        // no MBean and a non-existent port are defined for cluster 3. Therefore, the MBean cannot be reached and polling may be performed accordingly
         pollingVerwalter.aktualisiereZeitpunktLetztePollingAktivitaet("CLUSTER3"); 
         assertTrue(pollingVerwalter.startePolling("CLUSTER3"), "Polling darf gestartet werden");        
     }
