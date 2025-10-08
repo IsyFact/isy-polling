@@ -37,7 +37,7 @@ public class IsyPollingAutoConfiguration {
     public Advisor pollingAktionInterceptor(PollingVerwalter pollingVerwalter) {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
         pointcut.setExpression(
-            "@annotation(de.bund.bva.isyfact.polling.annotation.PollingAktion) || @within(de.bund.bva.isyfact.polling.annotation.PollingAktion)");
+            "@annotation(de.bund.bva.isyfact.polling.annotation.PollingAktion)");
         return new DefaultPointcutAdvisor(pointcut, new PollingAktionInterceptor(pollingVerwalter));
     }
 
