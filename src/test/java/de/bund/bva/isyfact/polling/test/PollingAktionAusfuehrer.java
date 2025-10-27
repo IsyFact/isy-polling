@@ -13,7 +13,7 @@ public class PollingAktionAusfuehrer {
      */
     @PollingAktion(pollingCluster="CLUSTER1")
     public void doPollingAktionClusterKorrekt() {
-        System.out.println("Pollingaktion für CLUSTER 1 ausgeführt.");
+        IO.println("Pollingaktion für CLUSTER 1 ausgeführt.");
     }
 
     /**
@@ -21,7 +21,7 @@ public class PollingAktionAusfuehrer {
      */
     @PollingAktion(pollingCluster="CLUSTER10")
     public void doPollingAktionClusterUnbekannt() {
-        System.out.println("Pollingaktion für CLUSTER 10 ausgeführt.");
+        IO.println("Pollingaktion für CLUSTER 10 ausgeführt.");
     }
 
 }

@@ -50,7 +50,7 @@ class IsyPollingPropertiesTest {
             assertThat(isyPollingProperties.getCluster().get("POSTFACH1_CLUSTER").getName()).isEqualTo("Postfachabruf-1");
 
             assertThat(isyPollingProperties.getCluster().get("POSTFACH2_CLUSTER").getJmxverbindungen()).hasSize(2);
-            assertThat(isyPollingProperties.getCluster().get("POSTFACH2_CLUSTER").getJmxverbindungen().get(0))
+            assertThat(isyPollingProperties.getCluster().get("POSTFACH2_CLUSTER").getJmxverbindungen().getFirst())
                 .isEqualTo("server1");
             assertThat(isyPollingProperties.getCluster().get("POSTFACH2_CLUSTER").getJmxverbindungen().get(1))
                 .isEqualTo("server2");

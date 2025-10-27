@@ -13,14 +13,14 @@ public abstract class AbstractPollingTest {
     public boolean pruefeJMXStatus() throws Exception {
 
         if (System.getProperty("com.sun.management.jmxremote") == null) {
-            System.out.println("JMX remote ist disabled");
+            IO.println("JMX remote ist disabled");
             return false;
         } else {
-            System.out.println("JMX remote is enabled");
+            IO.println("JMX remote is enabled");
             if (System.getProperty("com.sun.management.jmxremote.port") != null) {
-                System.out.println("JMX running on port "
-                    + Integer.parseInt(
-                    System.getProperty("com.sun.management.jmxremote.port")));
+                IO.println("JMX running on port "
+                        + Integer.parseInt(
+                        System.getProperty("com.sun.management.jmxremote.port")));
             }
         }
 
