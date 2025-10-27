@@ -53,6 +53,7 @@
         <isy-datetime.version>4.1.0-SNAPSHOT</isy-datetime.version>
         <isy-util.version>5.0.0-SNAPSHOT</isy-util.version>
         <isy-checkstyle-config.version>0.2.0</isy-checkstyle-config.version>
+        <spotbugs.version>4.8.5.0</spotbugs.version>
 
         <spring.boot.version>3.5.6</spring.boot.version>
 
@@ -293,6 +294,26 @@
                 </plugin>
 
                 <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${spotbugs.version}</version>
+                    <configuration>
+                        <effort>Max</effort>
+                        <threshold>high</threshold>
+                        <xmlOutput>true</xmlOutput>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>execute-spot-bugs</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>tidy-maven-plugin</artifactId>
                     <version>${tidy-maven-plugin.version}</version>
@@ -413,6 +434,10 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>tidy-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
