@@ -39,11 +39,13 @@
         <maven.compiler.version>3.11.0</maven.compiler.version>
         <maven.surefire.version>3.1.2</maven.surefire.version>
         <maven.checkstyle.version>3.6.0</maven.checkstyle.version>
+        <enforced.jdk.version>[17,22)</enforced.jdk.version>
         <enforced.maven.version>[3.6.3,4)</enforced.maven.version>
         <maven-enforcer-plugin.version>3.6.0</maven-enforcer-plugin.version>
         <maven.jacoco.version>0.8.12</maven.jacoco.version>
         <maven.javadoc.plugin.version>3.3.2</maven.javadoc.plugin.version>
         <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
+        <tidy-maven-plugin.version>1.4.0</tidy-maven-plugin.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -51,6 +53,7 @@
         <isy-datetime.version>4.1.0-SNAPSHOT</isy-datetime.version>
         <isy-util.version>5.0.0-SNAPSHOT</isy-util.version>
         <isy-checkstyle-config.version>0.2.0</isy-checkstyle-config.version>
+        <spotbugs.version>4.8.5.0</spotbugs.version>
 
         <spring.boot.version>3.5.6</spring.boot.version>
 
@@ -266,11 +269,68 @@
                             </goals>
                             <configuration>
                                 <rules>
+                                    <requireJavaVersion>
+                                        <version>${enforced.jdk.version}</version>
+                                    </requireJavaVersion>
                                     <requireMavenVersion>
                                         <version>${enforced.maven.version}</version>
                                     </requireMavenVersion>
                                 </rules>
                             </configuration>
+                        </execution>
+                        <execution>
+                            <id>enforce-dependency-convergence</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <dependencyConvergence/>
+                                </rules>
+                                <fail>true</fail>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${spotbugs.version}</version>
+                    <configuration>
+                        <effort>Max</effort>
+                        <threshold>high</threshold>
+                        <xmlOutput>true</xmlOutput>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>execute-spot-bugs</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>tidy-maven-plugin</artifactId>
+                    <version>${tidy-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>tidy-before-check</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>pom</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>check-pom-style</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
                         </execution>
                     </executions>
                 </plugin>
@@ -335,7 +395,7 @@
                     <version>${maven.flatten.version}</version>
                     <configuration>
                         <updatePomFile>true</updatePomFile>
-                        <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                        <flattenMode>oss</flattenMode>
                     </configuration>
                     <executions>
                         <execution>
@@ -371,6 +431,14 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tidy-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

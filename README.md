@@ -33,3 +33,4 @@ Die Dokumentation des Projekts ist unter der Namensnennung 4.0 International ([C
 ### Kontakt
 
 __Vielen Dank für die Verwendung von isy-polling!__
+Bei Fragen oder Anmerkungen können Sie uns unter folgender E-Mail-Adresse kontaktieren: [isyfact@bva.bund.de](mailto:isyfact@bva.bund.de)
