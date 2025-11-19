@@ -50,7 +50,7 @@ class JMXConnectionParameter {
         String url = "service:jmx:rmi:///jndi/rmi://" + ipAdressePort + "/jmxrmi";
         try {
             jmxServiceUrl = new JMXServiceURL(url);
-        } catch (MalformedURLException e) {
+        } catch (MalformedURLException _) {
             throw new PollingClusterKonfigurationException(
                     Fehlerschluessel.MSG_JMX_IPADRESSEPORT_FEHLERHAFT, url, id);
         }

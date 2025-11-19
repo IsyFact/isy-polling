@@ -6,6 +6,9 @@
     - Portierung der Tickets IFS-4367, ISY-1025, IFS-3740 ins entkoppelte Repository
 - `IFS-4583`: Wiedereinführung der Quality-Gates
 
+### BREAKING CHANGES
+- `IFS-4922`: Aktualisierung von Java 17 auf 25
+
 ### DEPENDENCY UPGRADES
 - `IFS-4655`: Update von Maven Checkstyle Plugin auf Version 3.6.0
 - `IFS-4531`: Update von Flatten Maven Plugin auf Version 1.7.1

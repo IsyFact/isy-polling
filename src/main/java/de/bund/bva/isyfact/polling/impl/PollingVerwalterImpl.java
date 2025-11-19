@@ -143,10 +143,10 @@ public class PollingVerwalterImpl implements PollingVerwalter, InitializingBean 
             ObjectName mbeanName = new ObjectName(mBeanObjektName);
             ergebnis = (Long) mbsc.getAttribute(mbeanName, ZEITRAUM_LETZTE_POLLING_AKTIVITAET);
 
-        } catch (MalformedObjectNameException e) {
+        } catch (MalformedObjectNameException _) {
             throw new PollingClusterKonfigurationException(Fehlerschluessel.MSG_MBEAN_OBJEKT_NAME_FEHLERHAFT,
                     mBeanObjektName);
-        } catch (NullPointerException e) {
+        } catch (NullPointerException _) {
             throw new PollingClusterKonfigurationException(Fehlerschluessel.MSG_MBEAN_OBJEKT_NAME_LEER);
         } catch (IOException e) {
             throw new PollingUeberpruefungTechnicalException(Fehlerschluessel.MSG_VERBINDUNGSFEHLER, e,
