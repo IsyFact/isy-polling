@@ -10,6 +10,7 @@
 - `IFS-4922`: Aktualisierung von Java 17 auf 25
 
 ### DEPENDENCY UPGRADES
+- Update org.apache.maven.plugins:maven-gpg-plugin von Version 3.0.1 auf 3.2.8
 - Update org.apache.maven.plugins:maven-enforcer-plugin von Version 3.6.0 auf 3.6.2
 - Update com.github.spotbugs:spotbugs-maven-plugin von Version 4.9.8.1 auf 4.9.8.2
 - Update IsyFact/isy-github-actions-templates/.github/workflows/dependabot_auto_changelog_template.yml von Version 1.8.0 auf 2.1.1
