@@ -10,6 +10,7 @@
 - `IFS-4922`: Aktualisierung von Java 17 auf 25
 
 ### DEPENDENCY UPGRADES
+- Update IsyFact/isy-github-actions-templates/.github/workflows/next_version.yml von Version 2.0.0 auf 2.1.1
 - Update org.apache.maven.plugins:maven-surefire-plugin von Version 3.1.2 auf 3.5.4
 - Update org.codehaus.mojo:flatten-maven-plugin von Version 1.7.1 auf 1.7.3
 - Update org.apache.maven.plugins:maven-jar-plugin von Version 3.3.0 auf 3.5.0
