@@ -8,6 +8,7 @@
 
 ### BREAKING CHANGES
 - `IFS-4922`: Aktualisierung von Java 17 auf 25
+- `IFS-4859`: Spring-Boot Update auf Version 4 (inkludiert Update auf Spring Framework 7)
 
 ### DEPENDENCY UPGRADES
 - Update org.apache.maven.plugins:maven-surefire-plugin von Version 3.1.2 auf 3.5.4
