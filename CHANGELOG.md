@@ -11,6 +11,7 @@
 - `IFS-4859`: Spring-Boot Update auf Version 4 (inkludiert Update auf Spring Framework 7)
 
 ### DEPENDENCY UPGRADES
+- Update org.springframework.boot:spring-boot-dependencies von Version 4.0.2 auf 4.0.3
 - Update org.apache.maven.plugins:maven-surefire-plugin von Version 3.1.2 auf 3.5.4
 - Update org.codehaus.mojo:flatten-maven-plugin von Version 1.7.1 auf 1.7.3
 - Update org.apache.maven.plugins:maven-jar-plugin von Version 3.3.0 auf 3.5.0
