@@ -1,7 +1,8 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-orange)](https://opensource.org/licenses/Apache-2.0)
 ![GitHub Sprache](https://img.shields.io/badge/Language-Java_25-orange)
-![GitHub IsyFact](https://img.shields.io/badge/IsyFact-IsyDatetime_5.0.0-blue)
-![GitHub IsyFact](https://img.shields.io/badge/IsyFact-IsyUtil_5.0.0-blue)
+![GitHub Spring Boot](https://img.shields.io/badge/SpringBoot-4.x-green)
+![GitHub IsyFact](https://img.shields.io/badge/IsyFact-IsyDatetime_5.x-blue)
+![GitHub IsyFact](https://img.shields.io/badge/IsyFact-IsyUtil_5.x-blue)
 
 # isy-polling
 
