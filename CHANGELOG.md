@@ -11,6 +11,7 @@
 - `IFS-4859`: Spring-Boot Update auf Version 4 (inkludiert Update auf Spring Framework 7)
 
 ### DEPENDENCY UPGRADES
+- Update org.cyclonedx:cyclonedx-maven-plugin von Version 2.7.11 auf 2.9.1
 - Update org.springframework.boot:spring-boot-dependencies von Version 4.0.3 auf 4.0.4
 - Update IsyFact/isy-github-actions-templates/.github/workflows/maven_create_release_template.yml von Version 2.1.1 auf 2.3.0
 - Update IsyFact/isy-github-actions-templates/.github/workflows/maven_deploy_template.yml von Version 2.1.1 auf 2.3.0
