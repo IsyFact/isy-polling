@@ -11,6 +11,7 @@
 - `IFS-4859`: Spring-Boot Update auf Version 4 (inkludiert Update auf Spring Framework 7)
 
 ### DEPENDENCY UPGRADES
+- Update com.github.spotbugs:spotbugs-maven-plugin von Version 4.9.8.2 auf 4.9.8.3
 - Update org.apache.maven.plugins:maven-surefire-plugin von Version 3.5.4 auf 3.5.5
 - Update org.apache.maven.plugins:maven-javadoc-plugin von Version 3.3.2 auf 3.12.0
 - Update org.cyclonedx:cyclonedx-maven-plugin von Version 2.7.11 auf 2.9.1
