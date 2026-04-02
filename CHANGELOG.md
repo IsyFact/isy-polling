@@ -12,6 +12,8 @@
 
 ### DEPENDENCY UPGRADES
 - Update IsyFact/isy-github-actions-templates/.github/workflows/dependabot_auto_merge_template.yml von Version 2.1.1 auf 2.3.0
+- Update IsyFact/isy-github-actions-templates/.github/workflows/dependabot_auto_changelog_template.yml von Version 2.1.1 auf 2.3.0
+- Update IsyFact/isy-github-actions-templates/.github/workflows/commit_message_checker_template.yml von Version 2.1.1 auf 2.3.0
 - Update com.github.spotbugs:spotbugs-maven-plugin von Version 4.9.8.2 auf 4.9.8.3
 - Update org.apache.maven.plugins:maven-surefire-plugin von Version 3.5.4 auf 3.5.5
 - Update org.apache.maven.plugins:maven-javadoc-plugin von Version 3.3.2 auf 3.12.0
