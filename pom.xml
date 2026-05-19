@@ -50,7 +50,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <isy-datetime.version>5.0.0-SNAPSHOT</isy-datetime.version>
-        <isy-util.version>5.0.0-SNAPSHOT</isy-util.version>
+        <isy-util.version>5.0.0</isy-util.version>
         <isy-checkstyle-config.version>0.2.0</isy-checkstyle-config.version>
         <spotbugs.version>4.9.8.3</spotbugs.version>
 
