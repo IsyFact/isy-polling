@@ -11,6 +11,7 @@
 - `IFS-4859`: Spring-Boot Update auf Version 4 (inkludiert Update auf Spring Framework 7)
 
 ### DEPENDENCY UPGRADES
+- Update de.bund.bva.isyfact:isy-datetime von Version 5.0.0-SNAPSHOT auf 5.0.0
 - Update IsyFact/isy-github-actions-templates/.github/workflows/dependabot_auto_merge_template.yml von Version 2.1.1 auf 2.3.0
 - Update IsyFact/isy-github-actions-templates/.github/workflows/dependabot_auto_changelog_template.yml von Version 2.1.1 auf 2.3.0
 - Update IsyFact/isy-github-actions-templates/.github/workflows/commit_message_checker_template.yml von Version 2.1.1 auf 2.3.0
