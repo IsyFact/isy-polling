@@ -1,0 +1,55 @@
+package de.bund.bva.isyfact.polling.common.exception;
+
+import java.io.Serial;
+
+import static de.bund.bva.isyfact.util.text.MessageProvider.createMessage;
+
+/**
+ * Abstrakte technische <i>unchecked</i> Haupt-Exception. Alle technischen, <i>unchecked</i> Exceptions
+ * der Bibliothek isy-polling müssen von dieser Klasse abgeleitet werden.
+ */
+public abstract class PollingTechnicalRuntimeException extends RuntimeException {
+
+    /**
+     * SerialVersionUID.
+     **/
+    @Serial
+    private static final long serialVersionUID = 0L;
+
+    /**
+     * Erstellt eine neue technische <i>unchecked</i> Exception mit einer Ausnahme-ID für den Fehlertext und
+     * einem Array mit Werten für die Variablenersetzung im Fehlertext.
+     * <p>
+     * Der Grund wird nicht initialisiert und kann später durch den Aufruf der Methode
+     * {@link #initCause(Throwable)} initialisiert werden.
+     *
+     * @param ausnahmeID Die Ausnahme-ID. Der Schlüssel, welcher verwendet wird, um einen Nachrichtentext, welcher
+     *                   als Fehler-Nachricht für die Exception verwendet wird aus einem ResourceBundle zu
+     *                   laden.
+     * @param parameter  Die Parameter. Parameter für die möglichen Variablen in einer Fehler-Nachricht.
+     *                   <tt>null</tt> als Wert ist erlaubt und bedeutet, dass keine Variablen zu ersetzen sind.
+     */
+    public PollingTechnicalRuntimeException(String ausnahmeID, String... parameter) {
+        super(createMessage(ausnahmeID, parameter));
+    }
+
+    /**
+     * Erstellt eine neue technische <i>unchecked</i> Exception mit einer Ausnahme-ID für den Fehlertext,
+     * einem Array mit Werten für die Variablenersetzung im Fehlertext und mit dem übergebenen Grund.
+     * <p>
+     * Anmerkung: Der Fehlertext von <code>cause</code> (dem Grund) ist <i>nicht</i> automatisch mit dem
+     * übergebenen Fehlertext verbunden.
+     *
+     * @param ausnahmeID Die Ausnahme-ID. Der Schlüssel, welcher verwendet wird, um einen Nachrichtentext, welcher
+     *                   als Fehler-Nachricht für die Exception verwendet wird aus einem ResourceBundle zu laden.
+     * @param parameter  Die Parameter. Parameter für die möglichen Variablen in einer Fehler-Nachricht.
+     *                   <tt>null</tt> als Wert ist erlaubt und bedeutet, dass keine Variablen zu ersetzen sind.
+     * @param throwable  Der Grund. Throwable wird gespeichert für die spätere Nutzung durch die Methode
+     *                   {@link #getCause()}. <tt>null</tt> als Wert ist erlaubt und bedeutet, dass kein Grund
+     *                   existiert oder der Grund nicht bekannt ist.
+     */
+    public PollingTechnicalRuntimeException(String ausnahmeID, Throwable throwable,
+                                            String... parameter) {
+        super(createMessage(ausnahmeID, parameter), throwable);
+    }
+}

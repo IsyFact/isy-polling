@@ -1,0 +1,20 @@
+<configuration scan="true" scanPeriod="1 minutes">
+
+    <appender name="KONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[P: %-5p] [T: %t] [L: %c] - [M: %m] %n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="KONSOLE"/>
+    </root>
+
+    <logger name="de.bund.bva.isyfact" level="DEBUG" additivity="true">
+        <appender-ref ref="KONSOLE"/>
+    </logger>
+
+    <logger name="org.springframework" level="INFO" additivity="false">
+        <appender-ref ref="KONSOLE"/>
+    </logger>
+</configuration>
