@@ -4,6 +4,7 @@
 ### BREAKING CHANGES
 
 ### DEPENDENCY UPGRADES
+- Update org.sonatype.central:central-publishing-maven-plugin von Version 0.10.0 auf 0.11.0
 - Update com.github.spotbugs:spotbugs-maven-plugin von Version 4.9.8.3 auf 4.10.3.0
 - Update org.springframework.boot:spring-boot-dependencies von Version 4.0.5 auf 4.1.0
 - Update org.apache.maven.plugins:maven-surefire-plugin von Version 3.5.5 auf 3.5.6
