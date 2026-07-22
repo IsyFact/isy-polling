@@ -4,6 +4,7 @@
 ### BREAKING CHANGES
 
 ### DEPENDENCY UPGRADES
+- Update org.jacoco:jacoco-maven-plugin von Version 0.8.14 auf 0.8.15
 - Update org.apache.maven.plugins:maven-enforcer-plugin von Version 3.6.2 auf 3.6.3
 - Update org.cyclonedx:cyclonedx-maven-plugin von Version 2.9.1 auf 2.9.2
 - Update org.sonatype.central:central-publishing-maven-plugin von Version 0.10.0 auf 0.11.0
