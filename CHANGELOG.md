@@ -4,6 +4,7 @@
 ### BREAKING CHANGES
 
 ### DEPENDENCY UPGRADES
+- Update com.github.spotbugs:spotbugs-maven-plugin von Version 4.10.3.0 auf 4.10.4.0
 - Update org.codehaus.mojo:flatten-maven-plugin von Version 1.7.3 auf 1.8.0
 - Update org.apache.maven.plugins:maven-jar-plugin von Version 3.5.0 auf 3.5.1
 - Update IsyFact/isy-github-actions-templates/.github/workflows/semgrep.yml von Version 2.5.0 auf 3.0.0
